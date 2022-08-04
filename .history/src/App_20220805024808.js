@@ -7,13 +7,7 @@ import {
 } from "react-router-dom";
 function App() {
   return <div className="App">
-     <Router>
-
-      <Routes>
-      <Route path='/arena/:id'  element={<Arena/>}> </Route>
-      </Routes>
-
-    </Router>
+    <Arena></Arena>
   </div>;
 }
 
