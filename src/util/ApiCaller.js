@@ -3,13 +3,7 @@ import objectAssign from "object-assign";
 
 import { API_URL } from "../config";
 
-export const request = (
-  endpoint,
-  method,
-  headers = {},
-  params = {},
-  body = {}
-) => {
+export const request = (endpoint, method, headers = {}, params = {}, body = {}) => {
   return Axios({
     url: API_URL + endpoint,
     method: method,

@@ -1,58 +1,58 @@
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode";
 
-import { LOCALSTORAGE_TOKEN_NAME } from '../config'
+import { LOCALSTORAGE_TOKEN_NAME } from "../config";
 
 class LocalStorageUtils {
   getItem(key, defaultValue = '""') {
-    if (typeof localStorage === 'undefined') {
-      return undefined
+    if (typeof localStorage === "undefined") {
+      return undefined;
     }
-    let item = localStorage.getItem(key)
-    if (item && item === 'undefined') {
-      item = defaultValue
+    let item = localStorage.getItem(key);
+    if (item && item === "undefined") {
+      item = defaultValue;
     }
-    return JSON.parse(item)
+    return JSON.parse(item);
   }
 
-  setItem(key, value = '') {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(key, JSON.stringify(value))
+  setItem(key, value = "") {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(key, JSON.stringify(value));
     }
   }
 
   removeItem(key) {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem(key)
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem(key);
     }
   }
 
   getUser() {
-    if (typeof localStorage !== 'undefined') {
-      const token = this.getItem(LOCALSTORAGE_TOKEN_NAME)
+    if (typeof localStorage !== "undefined") {
+      const token = this.getItem(LOCALSTORAGE_TOKEN_NAME);
       if (token) {
         try {
-          return jwt_decode(token)
+          return jwt_decode(token);
         } catch (err) {
           if (err.response && err.response.status === 401) {
-            this.deleteUser()
+            this.deleteUser();
           }
         }
-      } else return token
+      } else return token;
     }
-    return undefined
+    return undefined;
   }
 
   deleteUser() {
-    localStorage.removeItem(LOCALSTORAGE_TOKEN_NAME)
+    localStorage.removeItem(LOCALSTORAGE_TOKEN_NAME);
   }
 
   getToken() {
-    return this.getItem(LOCALSTORAGE_TOKEN_NAME)
+    return this.getItem(LOCALSTORAGE_TOKEN_NAME);
   }
 
   clear() {
-    localStorage.clear()
+    localStorage.clear();
   }
 }
 
-export default new LocalStorageUtils()
+export default new LocalStorageUtils();
