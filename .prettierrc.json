@@ -6,7 +6,7 @@
   "jsxBracketSameLine": false,
   "arrowParens": "always",
   "singleQuote": true,
-  "semi": true,
+  "semi": false,
   "endOfLine": "auto",
   "importOrder": [
     "^react$",
