@@ -1,11 +1,11 @@
-import Switch from "./routes";
+import Switch from './routes'
 
 const App = () => {
   return (
     <div className="App">
       <Switch></Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

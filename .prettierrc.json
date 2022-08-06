@@ -5,8 +5,8 @@
   "trailingComma": "es5",
   "jsxBracketSameLine": false,
   "arrowParens": "always",
-  "singleQuote": false,
-  "semi": true,
+  "singleQuote": true,
+  "semi": false,
   "endOfLine": "auto",
   "importOrder": [
     "^react$",

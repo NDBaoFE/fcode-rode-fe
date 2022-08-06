@@ -1,35 +1,35 @@
-import React from "react";
+import React from 'react'
 
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 
-import Login from "../page/login";
-import Start from "../page/start";
-import LocalStorageUtils from "../util/LocalStorageUtils";
+import Login from '../page/login'
+import Start from '../page/start'
+import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
-  const user = LocalStorageUtils.getUser();
+  const user = LocalStorageUtils.getUser()
   const privateRoutes = [
     {
-      path: "/",
+      path: '/',
       element: <Start />,
     },
     {
-      path: "/admin",
+      path: '/admin',
       // element: <Admin />,
     },
-  ];
+  ]
 
-  const publicRoutes = [{ path: "/login", element: <Login /> }];
+  const publicRoutes = [{ path: '/login', element: <Login /> }]
 
   const RenderPublicRoutes = () => {
-    return <Outlet />;
+    return <Outlet />
     // return !user || user.id?.length <= 0 ? <Outlet /> : <Navigate to="/" replace />;
-  };
+  }
 
   const RenderPrivateRoutes = () => {
-    return <Outlet />;
+    return <Outlet />
     // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />;
-  };
+  }
 
   return (
     <Routes>
@@ -46,7 +46,7 @@ const Switch = () => {
       </Route>
       <Route path="*" element={<Navigate to="/" replace />}></Route>
     </Routes>
-  );
-};
+  )
+}
 
-export default Switch;
+export default Switch
