@@ -1,9 +1,9 @@
-import Login from './page/login'
+import Switch from './routes'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <Login></Login>
+      <Switch></Switch>
     </div>
   )
 }
