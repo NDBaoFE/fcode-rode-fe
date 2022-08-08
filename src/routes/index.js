@@ -3,6 +3,7 @@ import React from 'react'
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 
 import Admin from '../page/admin'
+import AdminLogin from '../page/admin/adminLogin'
 import Login from '../page/login'
 import Start from '../page/start'
 import LocalStorageUtils from '../util/LocalStorageUtils'
@@ -20,7 +21,10 @@ const Switch = () => {
     },
   ]
 
-  const publicRoutes = [{ path: '/login', element: <Login /> }]
+  const publicRoutes = [
+    { path: '/login', element: <Login /> },
+    { path: '/login/admin', element: <AdminLogin /> },
+  ]
 
   const adminRoutes = [{ path: '/admin', element: <Admin /> }]
 
@@ -36,7 +40,7 @@ const Switch = () => {
 
   const RenderAdminRoutes = () => {
     return <Outlet />
-    // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />;
+    // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/" replace />;
   }
 
   return (
