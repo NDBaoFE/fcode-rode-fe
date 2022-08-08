@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { useParams } from 'react-router-dom'
 import { FacebookShareButton } from 'react-share'
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components'
@@ -93,7 +92,7 @@ function Arena() {
       <NavBar />
       <Container>
         <Editor>
-          <EditorHeader count={count} />
+          <EditorHeader count={count} />.
           <CodeMirror
             className="editor "
             value={code}

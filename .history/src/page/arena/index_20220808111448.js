@@ -93,7 +93,7 @@ function Arena() {
       <NavBar />
       <Container>
         <Editor>
-          <EditorHeader count={count} />
+          <EditorHeader count={count} />.
           <CodeMirror
             className="editor "
             value={code}

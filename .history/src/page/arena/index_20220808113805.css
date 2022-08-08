@@ -58,8 +58,7 @@
       line-height: 16px;
   }
   .item__header{
-    background:#323f4a;
-
+    background:linear-gradient(to right,#721186,#9e00c5);
   display: flex;
   align-items: center;
   height:35px;
@@ -114,8 +113,11 @@
     z-index: 20;
     overflow: hidden;
   }
-  .output ,.target{
-    background:#27313a;
+  .output {
+    background:linear-gradient(to right,#9e00c5,#e345a0);
+  }
+  .target{
+    background-image: linear-gradient(to right,#e345a0,#f6b804);
   }
   .output h3{
     margin-left:20px;

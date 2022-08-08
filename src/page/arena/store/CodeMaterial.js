@@ -1,4 +1,4 @@
-export const DEFAULT_CODE=`<div></div>
+export const DEFAULT_CODE = `<div></div>
 <style>
   div {
     width: 100px;
@@ -15,5 +15,5 @@ export const DEFAULT_CODE=`<div></div>
 
 <!-- IMPORTANT: remove the comments before submitting -->`
 
- export const lastScore=`Submit to get score`
- export const highScore=`713.68 (132 chars)`
+export const lastScore = `Submit to get score`
+export const highScore = `713.68 (132 chars)`

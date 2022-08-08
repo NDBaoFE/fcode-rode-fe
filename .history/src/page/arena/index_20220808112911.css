@@ -58,8 +58,7 @@
       line-height: 16px;
   }
   .item__header{
-    background:#323f4a;
-
+    background:linear-gradient(#721186);
   display: flex;
   align-items: center;
   height:35px;

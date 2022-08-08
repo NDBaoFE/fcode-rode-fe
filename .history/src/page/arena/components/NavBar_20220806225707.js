@@ -53,7 +53,7 @@ export default NavBar
 
 const Container = styled.div`
   min-width: 1280px;
-  background: linear-gradient(to right, #721186, #9e00c5, #e345a0, #f6b804);
+  background: #0f1117;
   display: flex;
   align-items: center;
 `
