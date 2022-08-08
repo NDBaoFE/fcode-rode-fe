@@ -21,7 +21,7 @@ const Login = () => {
               <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-6"></div>
               <div
                 onClick={handleLogin}
-                className="p-2 bg-[#1b171f] text-sm text-[#54585C] w-2/3 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] duration-300"
+                className="p-2 bg-[#1b171f] text-sm text-[#777777] w-2/3 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] duration-300"
               >
                 Sign in with Google account ⇀
               </div>
