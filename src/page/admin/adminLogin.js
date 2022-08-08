@@ -13,9 +13,9 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <div className="min-h-screen min-w-screen flex">
-        <div className="m-auto w-[28rem] h-[32rem] rounded-lg shadow-2xl">
+        <div className="m-auto w-[28rem] h-[32rem] rounded-lg shadow-2xl bg-white">
           <div className="flex h-full">
             <div className="mx-auto relative py-6 w-full">
               <div className="absolute top-[7rem] mx-auto w-full text-center item-center">
@@ -57,7 +57,7 @@ const AdminLogin = () => {
                 </div>
                 <div
                   onClick={handleSubmit}
-                  className="p-2 my-6 text-white bg-[#1b171f] text-sm w-1/4 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] duration-300"
+                  className="p-2 my-6 text-white bg-[#1b171f] text-sm w-1/4 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] hover:bg-[#4e425f] duration-300 "
                 >
                   Log in
                 </div>
