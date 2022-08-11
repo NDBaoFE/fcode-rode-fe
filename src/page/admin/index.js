@@ -1,49 +1,130 @@
 import React from 'react'
 
 // import { Route } from 'react-router-dom'
+import { IoLogOutOutline } from 'react-icons/io5'
 
 const Admin = () => {
-  const LoginBox = () => {
+  const Sidebar = () => {
     return (
-      <div className="m-auto w-[28rem] h-[32rem] rounded-lg shadow-2xl">
-        <div className="flex h-full">
-          <div className="mx-auto relative py-6 w-full">
-            <div className="absolute top-[7rem] mx-auto w-full text-center item-center">
-              {/* <img src={Avatar} alt="Avatar" className="w-1/4 mx-auto rounded-lg" /> */}
-              <h2 className="text-xl pt-6 pb-2 text">
-                <span className="font-black">R.ODE Battle</span>
-              </h2>
-              <h3 className="text-xs">Managing page for ad</h3>
-              <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-6"></div>
-              <div className="my-2">
-                <input
-                  type="text"
-                  className="border border-0-[#11181C] bg-[#68707610] text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none"
-                />
+      <div className="w-60 h-full shadow-md bg-white px-1 absolute">
+        <div className="text-sm px-4 my-5 mx-2 flex items-center bg-gray-200 hover:bg-gray-300 duration-300 p-3 rounded-lg cursor-pointer">
+          Log out
+          <div onClick={logOutHandle} className="ml-auto ">
+            <IoLogOutOutline />
+          </div>
+        </div>
+        <ul className="relative pt-5">
+          <li className="relative">
+            <a
+              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-gray-100 hover:bg-gray-300 transition duration-300 ease-in-out"
+              href="/admin"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+            >
+              Score board
+            </a>
+          </li>
+          <li className="relative">
+            <a
+              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+              href="/admin/add"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+            >
+              Manage problems
+            </a>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+
+  const logOutHandle = () => {
+    alert('log out')
+  }
+
+  const DataTable = () => {
+    return (
+      <div className="pl-[240px] w-full">
+        <div className="flex flex-col">
+          <div className="overflow-x-auto">
+            <div className="py-2 inline-block min-w-full">
+              <div className="overflow-hidden">
+                <table className="min-w-full">
+                  <thead className="border-b">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        #
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        First
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        Last
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        Handle
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        1
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Mark
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Otto
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        @mdo
+                      </td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        2
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Jacob
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Thornton
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        @fat
+                      </td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        3
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Larry
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Wild
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        @twitter
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div className="my-2">
-                <input
-                  type="password"
-                  className="border border-0-[#11181C] bg-[#68707610] text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none"
-                />
-              </div>
-              <div
-                // onClick={handleLogin}
-                className="p-2 text-white bg-[#1b171f] text-sm w-1/4 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] duration-300"
-              >
-                Log in
-              </div>
-            </div>
-            <div className="absolute bottom-6 mx-auto w-full text-center">
-              <h4 className="text-xs">
-                Design by{' '}
-                <a
-                  href="https://f-code.tech/"
-                  className="font-semibold ease-in-out duration-300 hover:opacity-80 cursor-pointer"
-                >
-                  F-Code Team.
-                </a>
-              </h4>
             </div>
           </div>
         </div>
@@ -52,9 +133,10 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="min-h-screen min-w-screen flex">
-        <LoginBox />
+    <div className="min-h-screen min-w-screen bg-gray-50">
+      <div className="w-full">
+        <Sidebar />
+        <DataTable />
       </div>
     </div>
   )
