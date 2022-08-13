@@ -160,7 +160,7 @@ const AddProblem = () => {
 
   const Upload = () => {
     return (
-      <div className="ml-[240px] w-full flex mt-10">
+      <div className="pl-[240px] w-full flex mt-10">
         <div className="mx-auto">
           <h1>Uploaded image:</h1>
           {selectedImage && (
