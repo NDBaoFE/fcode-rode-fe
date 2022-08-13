@@ -5,8 +5,9 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Admin from '../page/admin'
 import AddProblem from '../page/admin/addProblem'
 import AdminLogin from '../page/admin/adminLogin'
-import Final from '../page/admin/final'
+import RoundFour from '../page/admin/roundFour'
 import RoundOne from '../page/admin/roundOne'
+import RoundThree from '../page/admin/roundThree'
 import RoundTwo from '../page/admin/roundTwo'
 import Login from '../page/login'
 import Start from '../page/start'
@@ -34,7 +35,8 @@ const Switch = () => {
     { path: '/admin', element: <Admin /> },
     { path: '/admin/roundOne', element: <RoundOne /> },
     { path: '/admin/roundTwo', element: <RoundTwo /> },
-    { path: '/admin/final', element: <Final /> },
+    { path: '/admin/roundThree', element: <RoundThree /> },
+    { path: '/admin/roundFour', element: <RoundFour /> },
     { path: '/admin/manageProblem', element: <AddProblem /> },
   ]
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { IoLogOutOutline } from 'react-icons/io5'
 
-const RoundTwo = () => {
+const roundFour = () => {
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
@@ -25,7 +25,7 @@ const RoundTwo = () => {
           </li>
           <li className="relative">
             <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
+              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
               href="/admin/roundTwo"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
@@ -45,7 +45,7 @@ const RoundTwo = () => {
           </li>
           <li className="relative">
             <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-slate-200 hover:bg-gray-300 transition duration-300 ease-in-out"
               href="/admin/roundFour"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
@@ -171,4 +171,4 @@ const RoundTwo = () => {
   )
 }
 
-export default RoundTwo
+export default roundFour
