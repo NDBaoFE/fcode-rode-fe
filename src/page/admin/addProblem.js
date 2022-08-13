@@ -5,6 +5,15 @@ import { IoLogOutOutline } from 'react-icons/io5'
 
 const AddProblem = () => {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [problem, setProblem] = useState([
+    {
+      id: 1,
+      code: 'code123',
+      image: 'string',
+      start: 'date',
+      end: 'date',
+    },
+  ])
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
@@ -106,7 +115,7 @@ const AddProblem = () => {
                         scope="col"
                         className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
-                        Begin
+                        Start
                       </th>
                       <th
                         scope="col"
@@ -117,23 +126,28 @@ const AddProblem = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        1
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Mark
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Otto
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                    </tr>
+                    {problem &&
+                      problem.map((prb, idx) => {
+                        return (
+                          <tr className="border-b" key={prb.id}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              {idx + 1}
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {prb.code}
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {prb.image}
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {prb.start}
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {prb.end}
+                            </td>
+                          </tr>
+                        )
+                      })}
                   </tbody>
                 </table>
               </div>
@@ -146,7 +160,7 @@ const AddProblem = () => {
 
   const Upload = () => {
     return (
-      <div className="w-full flex mt-10">
+      <div className="ml-[240px] w-full flex mt-10">
         <div className="mx-auto">
           <h1>Uploaded image:</h1>
           {selectedImage && (

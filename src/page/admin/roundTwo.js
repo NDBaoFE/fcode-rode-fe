@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const RoundTwo = () => {
+  const [codeOne, setCodeOne] = useState([
+    {
+      id: 1,
+      name: 'Cao Nguyen Hoang Hiep',
+      email: 'hiepcnhse160050@gmail.com',
+      score: '100',
+    },
+  ])
+
+  const [codeTwo, setCodeTwo] = useState([
+    {
+      id: 1,
+      name: 'Cao Nguyen Hoang Hiep',
+      email: 'hiepcnhse160050@gmail.com',
+      score: '100',
+    },
+  ])
+
+  const [codeThree, setCodeThree] = useState([
+    {
+      id: 1,
+      name: 'Cao Nguyen Hoang Hiep',
+      email: 'hiepcnhse160050@gmail.com',
+      score: '100',
+    },
+  ])
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
@@ -74,89 +100,185 @@ const RoundTwo = () => {
 
   const DataTable = () => {
     return (
-      <div className="pl-[240px] w-full">
-        <div className="flex flex-col">
-          <div className="overflow-x-auto">
-            <div className="py-2 inline-block min-w-full">
-              <div className="overflow-hidden">
-                <table className="min-w-full">
-                  <thead className="border-b">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                      >
-                        #
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                      >
-                        Email
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                      >
-                        Score
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        1
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Mark
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Otto
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                    </tr>
-                    <tr className="bg-white border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        2
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Jacob
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Thornton
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @fat
-                      </td>
-                    </tr>
-                    <tr className="bg-white border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        3
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Larry
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Wild
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        @twitter
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      <div className="py-2 inline-block min-w-full">
+        {/* start code one */}
+
+        <div className="pb-16">
+          <div className="flex">
+            <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
+              EXAM CODE 1
+            </h3>
+          </div>
+          <div className="overflow-hidden">
+            <table className="min-w-full">
+              <thead className="border-b">
+                <tr>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    #
+                  </th>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Name
+                  </th>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Email
+                  </th>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {codeOne &&
+                  codeOne.map((player, idx) => {
+                    return (
+                      <tr className="border-b" key={player.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {idx + 1}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {player.name}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {player.email}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {player.score}
+                        </td>
+                      </tr>
+                    )
+                  })}
+              </tbody>
+            </table>
           </div>
         </div>
+
+        {/* end code one */}
+
+        {codeTwo && (
+          <div className="pb-16">
+            <div className="flex">
+              <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
+                EXAM CODE 2
+              </h3>
+            </div>
+            <div className="overflow-hidden">
+              <table className="min-w-full">
+                <thead className="border-b">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      #
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Email
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Score
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {codeTwo &&
+                    codeTwo.map((player, idx) => {
+                      return (
+                        <tr className="border-b" key={player.id}>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {idx + 1}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.name}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.email}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.score}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {codeThree && (
+          <div className="pb-16">
+            <div className="flex">
+              <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
+                EXAM CODE 3
+              </h3>
+            </div>
+            <div className="overflow-hidden">
+              <table className="min-w-full">
+                <thead className="border-b">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      #
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Email
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Score
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {codeThree &&
+                    codeThree.map((player, idx) => {
+                      return (
+                        <tr className="border-b" key={player.id}>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {idx + 1}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.name}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.email}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.score}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
@@ -165,7 +287,13 @@ const RoundTwo = () => {
     <div className="min-h-screen min-w-screen bg-gray-50">
       <div className="w-full">
         <Sidebar />
-        <DataTable />
+        <div className="pl-[240px] w-full">
+          <div className="flex flex-col">
+            <div className="overflow-x-auto">
+              <DataTable />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

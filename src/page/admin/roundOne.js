@@ -95,7 +95,7 @@ const RoundOne = () => {
       <div className="py-2 inline-block min-w-full">
         {/* start code one */}
 
-        <div>
+        <div className="pb-16">
           <div className="flex">
             <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
               EXAM CODE 1
@@ -147,7 +147,7 @@ const RoundOne = () => {
         {/* end code one */}
 
         {codeTwo && (
-          <div>
+          <div className="pb-16">
             <div className="flex">
               <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
                 EXAM CODE 2
@@ -184,8 +184,8 @@ const RoundOne = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {codeOne &&
-                    codeOne.map((player, idx) => {
+                  {codeTwo &&
+                    codeTwo.map((player, idx) => {
                       return (
                         <tr className="border-b" key={player.id}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
