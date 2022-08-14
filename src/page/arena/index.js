@@ -14,7 +14,7 @@ import TargetHeader from './components/TargetHeader'
 
 import './index.css'
 import { lastScore, highScore } from './store/CodeMaterial'
-import { problems } from './store/dtb.js'
+import { getExpiredTime, problems } from './store/dtb'
 
 import { htmlLanguage } from '@codemirror/lang-html'
 import FacebookIcon from '@mui/icons-material/Facebook'
@@ -87,6 +87,10 @@ function Arena() {
       iframeRef.current.style.width = '400px'
     }
   }
+  const handleSubmit = () => {
+    const realtime = new Date().getTime()
+    alert(`${getExpiredTime - realtime}`)
+  }
 
   return (
     <>
@@ -107,7 +111,9 @@ function Arena() {
             }}
           />
           <div className="btn-group">
-            <div className="submit-btn">Submit</div>
+            <div className="submit-btn" onClick={handleSubmit}>
+              Submit
+            </div>
           </div>
         </Editor>
         <OutPut>

@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { problems } from '../store/dtb'
+import { problems, getExpiredTime } from '../store/dtb'
+import CountdownTimer from './CountdownTimer'
 
 function NavBar() {
   const { id } = useParams()
@@ -11,6 +12,8 @@ function NavBar() {
   let path = ''
   let colors = []
   const [value, setValue] = useState(name)
+
+  const ExpiredTime = getExpiredTime
 
   for (let problem of problems) {
     if (problem.id == id) {
@@ -44,7 +47,9 @@ function NavBar() {
           <ul className="other-problems">{list}</ul>
         </details>
       </LeftNavBar>
-      <RightNavBar></RightNavBar>
+      <RightNavBar>
+        <CountdownTimer targetDate={ExpiredTime} />
+      </RightNavBar>
     </Container>
   )
 }
@@ -55,7 +60,9 @@ const Container = styled.div`
   min-width: 1280px;
   background: linear-gradient(to right, #721186, #9e00c5, #e345a0, #f6b804);
   display: flex;
+  height: 60px;
   align-items: center;
+  justify-content: space-between;
 `
 
 const LeftNavBar = styled.div`

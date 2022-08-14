@@ -48,3 +48,5 @@ export const problems = [
     colors: ['#293D7E', '#6E91CA'],
   },
 ]
+export const getStartTime = 1660452215488
+export const getExpiredTime = getStartTime + 30 * 60 * 1000
