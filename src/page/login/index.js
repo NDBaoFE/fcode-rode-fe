@@ -9,7 +9,7 @@ const Login = () => {
 
   const LoginBox = () => {
     return (
-      <div className="m-auto w-[28rem] h-[40rem] bg-modal rounded-lg drop-shadow-md">
+      <div className="m-auto w-[28rem] h-[40rem] bg-modal rounded-lg shadow-lg">
         <div className="flex h-full">
           <div className="mx-auto relative py-6 w-full">
             <div className="absolute top-[7rem] mx-auto w-full text-center text-white item-center">
