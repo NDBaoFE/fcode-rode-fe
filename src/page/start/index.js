@@ -13,7 +13,7 @@ const Start = () => {
     alert('Entered: ' + code === '' ? 'nothing' : code)
   }
   const handleLogOut = () => {
-    LocalStorageUtils.removeItem('token')
+    LocalStorageUtils.deleteUser()
     return (window.location = '/login')
   }
   const user = LocalStorageUtils.getUser()
