@@ -20,10 +20,6 @@ const Switch = () => {
       path: '/',
       element: <Start />,
     },
-    {
-      path: '/admin',
-      // element: <Admin />,
-    },
   ]
 
   const publicRoutes = [
@@ -41,13 +37,11 @@ const Switch = () => {
   ]
 
   const RenderPublicRoutes = () => {
-    return <Outlet />
-    // return !user || user.id?.length <= 0 ? <Outlet /> : <Navigate to="/" replace />;
+    return !user || user.sub.name?.length <= 0 ? <Outlet /> : <Navigate to="/" replace />
   }
 
   const RenderPrivateRoutes = () => {
-    return <Outlet />
-    // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />;
+    return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />
   }
 
   const RenderAdminRoutes = () => {

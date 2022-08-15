@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+
 const Start = () => {
   const [code, setCode] = useState('')
 
@@ -10,6 +12,11 @@ const Start = () => {
   const handleSubmit = async () => {
     alert('Entered: ' + code === '' ? 'nothing' : code)
   }
+  const handleLogOut = () => {
+    LocalStorageUtils.removeItem('token')
+    return (window.location = '/login')
+  }
+  const user = LocalStorageUtils.getUser()
 
   return (
     <div className="h-screen bg-home bg-cover">
@@ -40,6 +47,17 @@ const Start = () => {
                   className="my-6 p-2 bg-[#1b171f] text-sm font-bold text-[#54585C] w-1/3 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] hover:bg-[#231e29] duration-300"
                 >
                   Start
+                </div>
+                <div className="mx-auto w-full text-center text-white">
+                  <h4 className="text-xs">
+                    Not <span className="font-semibold">{user?.sub.name}</span>?
+                    <div
+                      className="font-bold ease-in-out duration-300 hover:opacity-80 cursor-pointer ml-1 inline-block"
+                      onClick={handleLogOut}
+                    >
+                      Log out
+                    </div>
+                  </h4>
                 </div>
               </div>
             </div>
