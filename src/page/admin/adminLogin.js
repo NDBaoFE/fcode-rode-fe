@@ -6,7 +6,7 @@ import { GoogleLogin } from 'react-google-login'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 
-const AdminLogin = (props) => {
+const AdminLogin = () => {
   useEffect(() => {
     function start() {
       gapi.client.init({

@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+import adminApi from '../../util/adminApi'
 import signOut from './signOut'
 
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const RoundOne = () => {
+  const code = {
+    one: 'RODE2022_FCODE_CSSV1_607598',
+    two: 'RODE2022_FCODE_CSSV1Ba_313211',
+  }
   const [codeOne, setCodeOne] = useState([
     {
-      id: 1,
-      name: 'Cao Nguyen Hoang Hiep',
-      email: 'hiepcnhse160050@gmail.com',
-      score: '100',
+      lastSubmit: {
+        score: 0,
+        code: '',
+        submitAt: '',
+      },
+      user: { name: '', email: '' },
     },
   ])
 
@@ -22,6 +30,16 @@ const RoundOne = () => {
       score: '100',
     },
   ])
+
+  useEffect(() => {
+    const getCodeOne = async () => {
+      const token = LocalStorageUtils.getItem('token')
+      const res = await adminApi.getRank('1', token)
+      console.log(res)
+      setCodeOne(res.data)
+    }
+    getCodeOne()
+  }, [])
 
   const Sidebar = () => {
     return (
@@ -118,6 +136,9 @@ const RoundOne = () => {
                   <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                     Score
                   </th>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Last submit
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -129,13 +150,16 @@ const RoundOne = () => {
                           {idx + 1}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.name}
+                          {player.user.name}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.email}
+                          {player.user.email}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.score}
+                          {player.lastSubmit.score}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {player.lastSubmit.submitAt}
                         </td>
                       </tr>
                     )
