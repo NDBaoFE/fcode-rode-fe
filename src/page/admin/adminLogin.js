@@ -20,10 +20,7 @@ const AdminLogin = () => {
     const token = response.tokenId
     const res = await productApi.login(token)
     LocalStorageUtils.setItem('token', res.data.tokens.access.token)
-    if (res.data.userData.role === 'admin') {
-      LocalStorageUtils.setItem('alegale', 'h4w4VjKcv6mEYkTeWquwH2Cn')
-      return (window.location = '/admin')
-    }
+    return (window.location = '/admin')
   }
   const onFailure = (response) => {}
 
@@ -38,7 +35,7 @@ const AdminLogin = () => {
                 <h2 className="text-xl pb-2 text">
                   <span className="font-black">R.ODE Battle</span>
                 </h2>
-                <h3 className="text-xs">Managing page for ad</h3>
+                <h3 className="text-xs">Managing page for admin</h3>
                 <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-10"></div>
                 <GoogleLogin
                   clientId="977769293513-67s7vl5ij0nrvpafqliamobp1hhocrja.apps.googleusercontent.com"

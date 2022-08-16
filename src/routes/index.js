@@ -12,7 +12,6 @@ import Start from '../page/start'
 import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
-  const value = LocalStorageUtils.getItem('alegale')
   const user = LocalStorageUtils.getUser()
   const privateRoutes = [
     {
@@ -38,7 +37,7 @@ const Switch = () => {
   const RenderPublicRoutes = () => {
     return !user || user.sub.name?.length <= 0 ? (
       <Outlet />
-    ) : value === 'h4w4VjKcv6mEYkTeWquwH2Cn' ? (
+    ) : user.sub.userData?.role === 'admin' ? (
       <Navigate to="/admin" replace />
     ) : (
       <Navigate to="/" replace />
@@ -50,7 +49,7 @@ const Switch = () => {
   }
 
   const RenderAdminRoutes = () => {
-    return value === 'h4w4VjKcv6mEYkTeWquwH2Cn' ? <Outlet /> : <Navigate to="/" replace />
+    return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/" replace />
   }
 
   return (
