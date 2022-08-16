@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+import adminApi from '../../util/adminApi'
 import signOut from './signOut'
 
-// import { Route } from 'react-router-dom'
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const AddProblem = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   const [problem, setProblem] = useState([
     {
-      id: 1,
-      code: 'code123',
-      image: 'string',
-      start: 'date',
-      end: 'date',
+      problemId: '',
+      name: '',
+      image: '',
+      openTime: '',
+      closeTime: '',
     },
   ])
+
+  useEffect(() => {
+    const getRank = async () => {
+      const token = LocalStorageUtils.getItem('token')
+      const res = await adminApi.getAllProblem(token)
+      setProblem(res.data)
+    }
+    getRank()
+  }, [])
+
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
@@ -110,6 +121,12 @@ const AddProblem = () => {
                         scope="col"
                         className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
                         Image
                       </th>
                       <th
@@ -135,16 +152,19 @@ const AddProblem = () => {
                               {idx + 1}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {prb.code}
+                              {prb.problemId}
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              {prb.name}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               {prb.image}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {prb.start}
+                              {new Date(prb.openTime).toLocaleString()}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {prb.end}
+                              {new Date(prb.closeTime).toLocaleString()}
                             </td>
                           </tr>
                         )
