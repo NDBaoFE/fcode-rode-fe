@@ -12,7 +12,7 @@ import Start from '../page/start'
 import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
-  const value = LocalStorageUtils.getItem('role')
+  const value = LocalStorageUtils.getItem('alegale')
   const user = LocalStorageUtils.getUser()
   const privateRoutes = [
     {

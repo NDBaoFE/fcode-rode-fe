@@ -21,7 +21,7 @@ const AdminLogin = () => {
     const res = await productApi.login(token)
     LocalStorageUtils.setItem('token', res.data.tokens.access.token)
     if (res.data.userData.role === 'admin') {
-      LocalStorageUtils.setItem('role', 'h4w4VjKcv6mEYkTeWquwH2Cn')
+      LocalStorageUtils.setItem('alegale', 'h4w4VjKcv6mEYkTeWquwH2Cn')
       return (window.location = '/admin')
     }
   }
