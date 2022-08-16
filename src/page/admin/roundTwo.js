@@ -1,36 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+import adminApi from '../../util/adminApi'
 import signOut from './signOut'
 
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const RoundTwo = () => {
+  const code = {
+    one: 'RODE2022_FCODE_CSSV2_213213',
+    two: 'RODE2022_FCODE_CSSV2Ba1_297299',
+    three: 'RODE2022_FCODE_CSSV2Ba2_646950',
+  }
   const [codeOne, setCodeOne] = useState([
     {
-      id: 1,
-      name: 'Cao Nguyen Hoang Hiep',
-      email: 'hiepcnhse160050@gmail.com',
-      score: '100',
+      lastSubmit: {
+        score: 0,
+        code: '',
+        submitAt: '',
+      },
+      user: { name: '', email: '' },
     },
   ])
 
   const [codeTwo, setCodeTwo] = useState([
     {
-      id: 1,
-      name: 'Cao Nguyen Hoang Hiep',
-      email: 'hiepcnhse160050@gmail.com',
-      score: '100',
+      lastSubmit: {
+        score: 0,
+        code: '',
+        submitAt: '',
+      },
+      user: { name: '', email: '' },
     },
   ])
 
   const [codeThree, setCodeThree] = useState([
     {
-      id: 1,
-      name: 'Cao Nguyen Hoang Hiep',
-      email: 'hiepcnhse160050@gmail.com',
-      score: '100',
+      lastSubmit: {
+        score: 0,
+        code: '',
+        submitAt: '',
+      },
+      user: { name: '', email: '' },
     },
   ])
+
+  useEffect(() => {
+    const getRank = async () => {
+      const token = LocalStorageUtils.getItem('token')
+      const res1 = await adminApi.getRank('1', token)
+      const res2 = await adminApi.getRank('1', token)
+      const res3 = await adminApi.getRank('1', token)
+      setCodeOne(res1.data)
+      setCodeTwo(res2.data)
+      setCodeThree(res3.data)
+    }
+    getRank()
+  }, [])
+
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
@@ -126,24 +153,30 @@ const RoundTwo = () => {
                   <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                     Score
                   </th>
+                  <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                    Submit time
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {codeOne &&
                   codeOne.map((player, idx) => {
                     return (
-                      <tr className="border-b" key={player.id}>
+                      <tr className="border-b" key={idx}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {idx + 1}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.name}
+                          {player.user.name}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.email}
+                          {player.user.email}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {player.score}
+                          {player.lastSubmit.score}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {player.lastSubmit.submitAt}
                         </td>
                       </tr>
                     )
@@ -190,24 +223,33 @@ const RoundTwo = () => {
                     >
                       Score
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Submit time
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {codeTwo &&
                     codeTwo.map((player, idx) => {
                       return (
-                        <tr className="border-b" key={player.id}>
+                        <tr className="border-b" key={idx}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {idx + 1}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.name}
+                            {player.user.name}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.email}
+                            {player.user.email}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.score}
+                            {player.lastSubmit.score}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.lastSubmit.submitAt}
                           </td>
                         </tr>
                       )
@@ -253,24 +295,33 @@ const RoundTwo = () => {
                     >
                       Score
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Submit time
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {codeThree &&
                     codeThree.map((player, idx) => {
                       return (
-                        <tr className="border-b" key={player.id}>
+                        <tr className="border-b" key={idx}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {idx + 1}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.name}
+                            {player.user.name}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.email}
+                            {player.user.email}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {player.score}
+                            {player.lastSubmit.score}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            {player.lastSubmit.submitAt}
                           </td>
                         </tr>
                       )

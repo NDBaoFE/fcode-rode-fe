@@ -148,7 +148,7 @@ const RoundOne = () => {
                 {codeOne &&
                   codeOne.map((player, idx) => {
                     return (
-                      <tr className="border-b" key={player.id}>
+                      <tr className="border-b" key={idx}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {idx + 1}
                         </td>
@@ -221,7 +221,7 @@ const RoundOne = () => {
                   {codeTwo &&
                     codeTwo.map((player, idx) => {
                       return (
-                        <tr className="border-b" key={player.id}>
+                        <tr className="border-b" key={idx}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {idx + 1}
                           </td>
