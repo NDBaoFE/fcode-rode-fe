@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 
 import Admin from '../page/admin'
@@ -14,6 +12,7 @@ import Start from '../page/start'
 import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
+  const value = LocalStorageUtils.getItem('role')
   const user = LocalStorageUtils.getUser()
   const privateRoutes = [
     {
@@ -37,7 +36,13 @@ const Switch = () => {
   ]
 
   const RenderPublicRoutes = () => {
-    return !user || user.sub.name?.length <= 0 ? <Outlet /> : <Navigate to="/" replace />
+    return !user || user.sub.name?.length <= 0 ? (
+      <Outlet />
+    ) : value === 'h4w4VjKcv6mEYkTeWquwH2Cn' ? (
+      <Navigate to="/admin" replace />
+    ) : (
+      <Navigate to="/" replace />
+    )
   }
 
   const RenderPrivateRoutes = () => {
@@ -45,8 +50,7 @@ const Switch = () => {
   }
 
   const RenderAdminRoutes = () => {
-    return <Outlet />
-    // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/" replace />;
+    return value === 'h4w4VjKcv6mEYkTeWquwH2Cn' ? <Outlet /> : <Navigate to="/" replace />
   }
 
   return (

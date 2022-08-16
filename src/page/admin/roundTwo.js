@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import signOut from './signOut'
+
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const RoundTwo = () => {
@@ -32,9 +34,12 @@ const RoundTwo = () => {
   const Sidebar = () => {
     return (
       <div className="w-60 h-full shadow-md bg-white px-1 absolute">
-        <div className="text-sm px-4 my-5 mx-2 flex items-center bg-gray-200 hover:bg-gray-300 duration-300 p-3 rounded-lg cursor-pointer">
+        <div
+          onClick={signOut}
+          className="text-sm px-4 my-5 mx-2 flex items-center bg-gray-200 hover:bg-gray-300 duration-300 p-3 rounded-lg cursor-pointer"
+        >
           Log out
-          <div onClick={logOutHandle} className="ml-auto ">
+          <div className="ml-auto ">
             <IoLogOutOutline />
           </div>
         </div>
@@ -92,10 +97,6 @@ const RoundTwo = () => {
         </ul>
       </div>
     )
-  }
-
-  const logOutHandle = () => {
-    alert('log out')
   }
 
   const DataTable = () => {
