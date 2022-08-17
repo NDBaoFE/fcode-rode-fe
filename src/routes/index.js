@@ -7,6 +7,7 @@ import RoundFour from '../page/admin/roundFour'
 import RoundOne from '../page/admin/roundOne'
 import RoundThree from '../page/admin/roundThree'
 import RoundTwo from '../page/admin/roundTwo'
+import Algorithm from '../page/algorithm'
 import Login from '../page/login'
 import AlgorithmLogin from '../page/login/algorithm'
 import Start from '../page/start'
@@ -24,6 +25,7 @@ const Switch = () => {
       path: '/algorithm',
       element: <StartAlgorithm />,
     },
+    { path: '/algorithm/start', element: <Algorithm /> },
   ]
 
   const publicRoutes = [
