@@ -8,7 +8,7 @@ function OutPutHeader({
 }) {
   return (
     <div className="item__header output">
-      <h3>editor</h3>
+      <h3>output</h3>
       <div>
         <input
           type="checkbox"

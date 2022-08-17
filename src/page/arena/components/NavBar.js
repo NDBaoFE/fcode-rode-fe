@@ -44,15 +44,6 @@ function NavBar({ children }) {
         <Text>F - Code</Text>
       </LeftNavBar>
       <NavBarItem>
-        <h2 className="level" style={{ display: 'inline-block' }}>
-          <a href="#">Battle #19</a>
-        </h2>
-        <details className="problem-dropbox">
-          <summary>{value}</summary>
-          <ul className="other-problems">{list}</ul>
-        </details>
-      </NavBarItem>
-      <NavBarItem>
         <h4 className="header_title">TIMERS: </h4>
         <CountdownTimer targetDate={ExpiredTime} />
       </NavBarItem>

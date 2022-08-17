@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { FacebookShareButton } from 'react-share'
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components'
 
@@ -19,7 +18,6 @@ import { lastScore, highScore } from './store/CodeMaterial'
 import { getExpiredTime } from './store/dtb'
 
 import { htmlLanguage } from '@codemirror/lang-html'
-import FacebookIcon from '@mui/icons-material/Facebook'
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import CodeMirror from '@uiw/react-codemirror'
 import 'react-toastify/dist/ReactToastify.css'
@@ -117,20 +115,6 @@ function Arena() {
             <div>
               <p className="score-container__score-high-type">High Score:</p>
               <p className="score-container__score">{highScore}</p>
-            </div>
-            <div className="button-container">
-              <div className="share-button">
-                <FacebookShareButton
-                  url={'https://cssbattle.dev/'}
-                  quote={'helu'}
-                  hashtag={['#fcode', 'rode_battle']}
-                  description={'aiueo'}
-                  className="Demo__some-network__share-button"
-                >
-                  <FacebookIcon></FacebookIcon>
-                  <p>Challange</p>
-                </FacebookShareButton>
-              </div>
             </div>
           </div>
         </div>

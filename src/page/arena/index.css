@@ -166,7 +166,7 @@ code {
 }
 .output,
 .target {
-  background: #27313a;
+  background: #323f4a;
 }
 .output label {
   margin-right: 20px;
@@ -211,7 +211,7 @@ code {
 }
 
 .score-container__score {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--clr-text);
   bottom: 0;
@@ -293,9 +293,9 @@ code {
   transition: 0.3s ease all;
   cursor: pointer;
 }
-.score-container__score-type {
+/* .score-container__score-type {
   margin: 12px 0;
-}
+} */
 .button-container {
   display: flex;
   align-items: center;
@@ -314,11 +314,11 @@ code {
 .colors-list {
   display: flex;
   width: 100%;
-  background-color: var(--clr-colorlist);
+  background: var(--clr-box-bg);
   border-radius: 5px;
   flex-wrap: wrap;
   width: calc(var(--nav-bar-width) - 32px);
-  padding: 12px;
+  padding: 20px 12px;
 }
 .color {
   display: flex;
@@ -362,7 +362,7 @@ code {
 .submit-btn {
   width: 200px;
   height: 40px;
-  background-color: var(--clr-btn-primary);
+  background: linear-gradient(90deg, #721186, #9e00c5, #e345a0, #f6b804);
   border-radius: 5px;
   color: white;
   display: flex;
