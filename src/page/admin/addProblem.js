@@ -53,7 +53,6 @@ const AddProblem = () => {
       const token = LocalStorageUtils.getItem('token')
       const res = await adminApi.getAllProblem(token)
       setProblem(res.data)
-      console.log(res)
     }
     getProblem()
   }, [])

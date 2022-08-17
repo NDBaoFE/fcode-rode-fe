@@ -7,11 +7,6 @@ import signOut from './signOut'
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const RoundTwo = () => {
-  const code = {
-    one: 'RODE2022_FCODE_CSSV2_213213',
-    two: 'RODE2022_FCODE_CSSV2Ba1_297299',
-    three: 'RODE2022_FCODE_CSSV2Ba2_646950',
-  }
   const [codeOne, setCodeOne] = useState([
     {
       lastSubmit: {
@@ -48,9 +43,9 @@ const RoundTwo = () => {
   useEffect(() => {
     const getRank = async () => {
       const token = LocalStorageUtils.getItem('token')
-      const res1 = await adminApi.getRank('1', token)
-      const res2 = await adminApi.getRank('1', token)
-      const res3 = await adminApi.getRank('1', token)
+      const res1 = await adminApi.getRank('RODE2022_FCODE_CSSV2_213213', token)
+      const res2 = await adminApi.getRank('RODE2022_FCODE_CSSV2Ba1_297299', token)
+      const res3 = await adminApi.getRank('RODE2022_FCODE_CSSV2Ba2_646950', token)
       setCodeOne(res1.data)
       setCodeTwo(res2.data)
       setCodeThree(res3.data)
