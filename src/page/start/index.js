@@ -22,15 +22,17 @@ const Start = () => {
   }, [tokenImage])
   const handleSubmit = async () => {
     const token = LocalStorageUtils.getItem('token')
+    let res
     try {
-      const res = await productApi.startBattle(code, token)
+      res = await productApi.startBattle(code, token)
     } catch (error) {
       toast.error('Wrong code!!, Please try again')
+    } finally {
+      LocalStorageUtils.setItem('image', res.data.problem.image)
+      LocalStorageUtils.setItem('colors', res.data.problem.colors)
+      LocalStorageUtils.setItem('problemId', res.data.problem.problemId)
     }
 
-    LocalStorageUtils.setItem('image', res.data.problem.image)
-    LocalStorageUtils.setItem('colors', res.data.problem.colors)
-    LocalStorageUtils.setItem('problemId', res.data.problem.problemId)
     return (window.location = '/arena')
   }
   const handleLogOut = () => {

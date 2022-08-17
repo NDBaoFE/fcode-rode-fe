@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
+import logo from '../../../assets/img/avatar.png'
+import bg from '../../../assets/img/bg.png'
 import { problems, getExpiredTime } from '../store/dtb'
 import CountdownTimer from './CountdownTimer'
 
-function NavBar() {
+function NavBar({ children }) {
   const { id } = useParams()
   let name = ''
   let path = ''
@@ -38,18 +40,14 @@ function NavBar() {
   return (
     <Container>
       <LeftNavBar>
-        <img src="https://cssbattle.dev/images/logo.svg"></img>
-        <h2 className="level">
-          <a href="#">Battle #19</a>
-        </h2>
-        <details className="problem-dropbox">
-          <summary>{value}</summary>
-          <ul className="other-problems">{list}</ul>
-        </details>
+        <Logo src={logo}></Logo>
+        <Text>F - Code</Text>
       </LeftNavBar>
-      <RightNavBar>
+      <NavBarItem>
+        <h4 className="header_title">TIMERS: </h4>
         <CountdownTimer targetDate={ExpiredTime} />
-      </RightNavBar>
+      </NavBarItem>
+      <div>{children}</div>
     </Container>
   )
 }
@@ -57,17 +55,38 @@ function NavBar() {
 export default NavBar
 
 const Container = styled.div`
-  min-width: 1280px;
-  background: linear-gradient(to right, #721186, #9e00c5, #e345a0, #f6b804);
+  background: url(${bg});
   display: flex;
-  height: 60px;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  /* justify-content: space-between; */
+  left: 0;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  height: 100vh;
+  flex-direction: column;
+  width: 400px;
 `
 
 const LeftNavBar = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 0;
 `
-
-const RightNavBar = styled.div``
+const Logo = styled.img`
+  width: 45px;
+  height: 45px;
+`
+const NavBarItem = styled.div`
+  width: var(--nav-bar-width);
+  padding: 12px;
+  box-sizing: border-box;
+`
+export const Text = styled.h2`
+  color: #fff;
+  margin-left: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+`

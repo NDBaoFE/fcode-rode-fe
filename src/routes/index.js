@@ -46,7 +46,7 @@ const Switch = () => {
     return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />
   }
   const RenderArenaRoutes = () => {
-    if (user || user.sub.name?.length <= 0) {
+    if (user && user.sub.name?.length >= 0) {
       return <Outlet />
     } else {
       return <Navigate to="/" replace />

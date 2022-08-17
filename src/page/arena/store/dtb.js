@@ -51,4 +51,4 @@ export const problems = [
   },
 ]
 export const getStartTime = LocalStorageUtils.getItem('darkmode')
-export const getExpiredTime = getStartTime + parseInt(LocalStorageUtils.getItem('darkhorse'))
+export const getExpiredTime = getStartTime + parseInt(LocalStorageUtils.getItem('darkhorse')) * 1000

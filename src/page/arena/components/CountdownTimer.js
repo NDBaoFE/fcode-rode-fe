@@ -13,8 +13,6 @@ const ExpiredNotice = () => {
 }
 
 const ShowCounter = ({ minutes, seconds }) => {
-  const [expired, setExpired] = useState(false)
-  LocalStorageUtils.setItem('plsdontdeletethis', expired)
   return (
     <div className="show-counter">
       <div className="countdown-link">
@@ -23,7 +21,7 @@ const ShowCounter = ({ minutes, seconds }) => {
         <DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} />
       </div>
       <div className="alert">
-        This is a CountDown Clock .Remember to submit your code ontime,I wish you a great adventure
+        This is a CountDown Clock, remember to submit your code ontime. I wish you a great adventure
         with F-code Rode 2022!!
       </div>
     </div>
@@ -31,10 +29,16 @@ const ShowCounter = ({ minutes, seconds }) => {
 }
 
 const CountdownTimer = ({ targetDate }) => {
+  const [expired, setExpired] = useState(false)
+  LocalStorageUtils.setItem('plsdontdeletethis', expired)
   const [minutes, seconds] = useCountdown(targetDate)
 
   if (minutes + seconds <= 0) {
-    setExpired(true)
+    if (expired == false) {
+      setExpired(true)
+    }
+    LocalStorageUtils.clear()
+    window.location = '/'
     return <ExpiredNotice />
   } else {
     return <ShowCounter minutes={minutes} seconds={seconds} />

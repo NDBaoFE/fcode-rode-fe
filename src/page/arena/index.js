@@ -5,11 +5,12 @@ import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components'
 
 import EditorHeader from './components/EditorHeader'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 import NavBar from './components/NavBar'
 import OutPutHeader from './components/OutPutHeader'
 import TargetHeader from './components/TargetHeader'
 
+// import bg from '../../assets/img/bg.png'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 import './index.css'
@@ -31,7 +32,7 @@ function Arena() {
   const [imgPath, setImgPath] = useState('')
   const imgLink = LocalStorageUtils.getItem('image')
   const problemId = LocalStorageUtils.getItem('problemId')
-  const disbaledButton = parseBoolean(LocalStorageUtils.getItem('plsdontdeletethis'))
+  const disbaledButton = LocalStorageUtils.getItem('plsdontdeletethis')
   const colors = LocalStorageUtils.getItem('colors')
 
   const changeSlideCheckBoxValue = () => {
@@ -103,20 +104,39 @@ function Arena() {
     const realtime = new Date().getTime()
     alert(`${getExpiredTime - realtime}`)
     const token = LocalStorageUtils.getItem('token')
-    const score = await productApi.submit(problemId, code, token)
-    setScore(score.data.score)
+    const score1 = await productApi.submit(problemId, code, token)
+    let score = score1.data.score.toFixed(3)
+    setScore(score)
   }
 
   return (
-    <>
-      <NavBar />
+    <Wrapper>
+      <NavBar>
+        <Target>
+          <TargetContent>
+            <div className="inner-header">
+              <h4 className="header_title header__title--inner">Colors to use</h4>
+              <div className="colors-list ">{listOfColor}</div>
+            </div>
+          </TargetContent>
+        </Target>
+        <div className="inner-header">
+          <h4 className="header_title header__title--inner">Your Score</h4>
+          <div className="score-container">
+            <div>
+              <p className="score-container__score-type">Last Score:</p>
+              <p className="score-container__score">{score}</p>
+            </div>
+          </div>
+        </div>
+      </NavBar>
       <Container>
         <Editor>
           <EditorHeader count={count} />
           <CodeMirror
             className="editor "
             value={code}
-            height="calc(100vh - 173px);"
+            height="calc(100vh - 88px);"
             theme={dracula}
             extensions={[htmlLanguage]}
             options={{ lineWrapping: 'true', lineNumbers: 'true' }}
@@ -161,32 +181,14 @@ function Arena() {
                 <img src={`${imgPath}`} width="400px" height="300px" alt="level1" />
               </div>
             </div>
-            <div className="inner-header">
-              <h4 className="header_title header__title--inner">Your Score</h4>
-              <div className="score-container">
-                <div>
-                  <p className="score-container__score-type">Last Score:</p>
-                  <p className="score-container__score">{score.toFixed(3)}</p>
-                </div>
-              </div>
-            </div>
+            <Target>
+              <TargetHeader></TargetHeader>
+              <TargetContent>
+                <img src={`${imgPath}`} className="target_img" />
+              </TargetContent>
+            </Target>
           </OutPutContent>
         </OutPut>
-        <Target>
-          <TargetHeader></TargetHeader>
-          <TargetContent>
-            <img src={`${imgPath}`} className="target_img" />
-            <div className="inner-header">
-              <h4 className="header_title header__title--inner">Colors to use</h4>
-              <div className="colors-list ">{listOfColor}</div>
-              <h4 className="header_title header__title--inner">About us</h4>
-            </div>
-            <img
-              className="sponsor"
-              src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/291646809_467849768137138_5749637646581215505_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=0joPAy5ovygAX_RYYjR&_nc_ht=scontent.fsgn19-1.fna&oh=03_AVIuA1BQGOk3P4_00NAA6CmNA_P2werHKH5FuYZUDqlBpA&oe=630FDC80"
-            ></img>
-          </TargetContent>
-        </Target>
         <ToastContainer
           position="bottom-right"
           autoClose={5000}
@@ -200,26 +202,31 @@ function Arena() {
           theme="dark"
         />
       </Container>
-      <Footer />
-    </>
+      {/* <Footer /> */}
+    </Wrapper>
   )
 }
 
 export default Arena
+
+const Wrapper = styled.div`
+  background-color: #171d23;
+  min-width: 100vw;
+  min-height: 100vh;
+`
+
 const Container = styled.div`
   display: flex;
+  flex: 1;
+  margin-left: 420px;
 `
 const Editor = styled.div`
   min-width: 27.5rem;
   max-width: 100%;
-  min-height: calc(100vh - 8rem);
+  height: 100vh;
 `
 const Target = styled.div`
-  width: 440px;
-  min-width: 440px;
   max-width: 100vw;
-  height: calc(100vh - 85px);
-  overflow-y: scroll;
 
   img {
     width: 400px;
@@ -227,13 +234,14 @@ const Target = styled.div`
   }
 `
 const OutPut = styled.div`
-  min-width: 440px;
+  min-width: 400px;
   max-width: 100%;
-  height: calc(100vh - 85px);
+  margin-left: 50px;
+  height: 100vh;
 `
 
 const OutPutContent = styled.div`
-  background: #171d23;
+  /* background: #171d23; */
   width: 100%;
   height: 95%;
   display: flex;
