@@ -8,6 +8,7 @@ import RoundOne from '../page/admin/roundOne'
 import RoundThree from '../page/admin/roundThree'
 import RoundTwo from '../page/admin/roundTwo'
 import Algorithm from '../page/algorithm'
+import Arena from '../page/arena'
 import Login from '../page/login'
 import AlgorithmLogin from '../page/login/algorithm'
 import Start from '../page/start'
@@ -16,6 +17,7 @@ import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
   const user = LocalStorageUtils.getUser()
+  const problemId = LocalStorageUtils.getItem('problemId')
   const privateRoutes = [
     {
       path: '/css',
@@ -27,7 +29,7 @@ const Switch = () => {
     },
     { path: '/algorithm/start', element: <Algorithm /> },
   ]
-
+  const arenaRoutes = [{ path: '/arena', element: <Arena /> }]
   const publicRoutes = [
     { path: '/login/css', element: <Login /> },
     { path: '/login/admin', element: <AdminLogin /> },
@@ -56,6 +58,13 @@ const Switch = () => {
   const RenderPrivateRoutes = () => {
     return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login/css" replace />
   }
+  const RenderArenaRoutes = () => {
+    if ((user || user.sub.name?.length <= 0) && problemId !== null) {
+      return <Outlet />
+    } else {
+      return <Navigate to="/" replace />
+    }
+  }
 
   const RenderAdminRoutes = () => {
     return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/css" replace />
@@ -75,6 +84,12 @@ const Switch = () => {
       </Route>
       <Route element={<RenderPublicRoutes />}>
         {publicRoutes.map((route, idx) => (
+          <Route path={route.path} element={route.element} key={idx}></Route>
+        ))}
+      </Route>
+
+      <Route element={<RenderArenaRoutes />}>
+        {arenaRoutes.map((route, idx) => (
           <Route path={route.path} element={route.element} key={idx}></Route>
         ))}
       </Route>
