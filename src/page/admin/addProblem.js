@@ -7,7 +7,16 @@ import signOut from './signOut'
 import { IoLogOutOutline } from 'react-icons/io5'
 
 const AddProblem = () => {
-  const [selectedImage, setSelectedImage] = useState(null)
+  const [form, setForm] = useState({
+    name: '',
+    image: '',
+    openTime: '',
+    closeTime: '',
+    battleTime: '',
+    problemId: '',
+  })
+  const [colors, setColors] = useState('')
+  const [isShow, setIsShow] = useState(false)
   const [problem, setProblem] = useState([
     {
       problemId: '',
@@ -18,13 +27,32 @@ const AddProblem = () => {
     },
   ])
 
+  const handleSubmit = async () => {
+    let array = colors.split(', ')
+    const formData = new FormData()
+    formData.append('name', form.name)
+    formData.append('image', form.image)
+    formData.append('openTime', form.openTime)
+    formData.append('closeTime', form.closeTime)
+    formData.append('battleTime', form.battleTime)
+    formData.append('problemId', form.problemId)
+    array.map((e) => {
+      formData.append('colors', e)
+    })
+    const token = LocalStorageUtils.getItem('token')
+    const res = await adminApi.createProblem(token, formData)
+    if (res.status === 201) {
+      setIsShow(false)
+    }
+  }
+
   useEffect(() => {
-    const getRank = async () => {
+    const getProblem = async () => {
       const token = LocalStorageUtils.getItem('token')
       const res = await adminApi.getAllProblem(token)
       setProblem(res.data)
     }
-    getRank()
+    getProblem()
   }, [])
 
   const Sidebar = () => {
@@ -147,7 +175,7 @@ const AddProblem = () => {
                     {problem &&
                       problem.map((prb, idx) => {
                         return (
-                          <tr className="border-b" key={prb.id}>
+                          <tr className="border-b" key={prb.problemId}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                               {idx + 1}
                             </td>
@@ -181,27 +209,16 @@ const AddProblem = () => {
 
   const Upload = () => {
     return (
-      <div className="pl-[240px] w-full flex mt-10">
-        <div className="mx-auto">
-          <h1>Uploaded image:</h1>
-          {selectedImage && (
-            <div>
-              <img alt="not fount" width={'250px'} src={URL.createObjectURL(selectedImage)} />
-              <br />
-              <button onClick={() => setSelectedImage(null)}>Remove</button>
-            </div>
-          )}
-          <br />
-
-          <input
-            type="file"
-            name="myImage"
-            onChange={(event) => {
-              console.log(event.target.files[0])
-              setSelectedImage(event.target.files[0])
-            }}
-          />
-        </div>
+      <div className="flex">
+        <p className="text-sm text-gray-500 ml-3 w-1/2 my-auto">Choose image file (400x300): </p>
+        <input
+          type="file"
+          name="avatar"
+          accept="image/png, image/jpeg"
+          onChange={(event) => {
+            setForm({ ...form, image: event.target.files[0] })
+          }}
+        />
       </div>
     )
   }
@@ -211,7 +228,123 @@ const AddProblem = () => {
       <div className="w-full">
         <Sidebar />
         <DataTable />
-        <Upload />
+        <div className="pl-[240px] w-full flex mt-10">
+          <div className="mx-auto">
+            <button
+              className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              onClick={() => setIsShow(true)}
+            >
+              Add new problem
+            </button>
+          </div>
+        </div>
+
+        {isShow ? (
+          <>
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+              <div className="relative w-auto my-6 mx-auto max-w-xl">
+                {/*content*/}
+                <div className="border-0 rounded-lg shadow-lg px-5 pt-10 pb-5 relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  {/*header*/}
+                  <div className="flex items-start justify-between px-5 pb-5 rounded-t">
+                    <h3 className="text-2xl font-extrabold">Add new problem</h3>
+                  </div>
+                  {/*body*/}
+                  <div className="relative px-5 flex-auto">
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Name:</label>
+                      <input
+                        type="text"
+                        value={form.name}
+                        onChange={(event) => {
+                          setForm({ ...form, name: event.target.value })
+                        }}
+                        placeholder="Name"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Problem ID:</label>
+                      <input
+                        type="text"
+                        onChange={(event) => {
+                          setForm({ ...form, problemId: event.target.value })
+                        }}
+                        placeholder="Problem ID"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Battle time:</label>
+                      <input
+                        type="number"
+                        pattern="\d*"
+                        onChange={(event) => {
+                          setForm({ ...form, battleTime: event.target.value })
+                        }}
+                        placeholder="Battle Time"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Colors codes:</label>
+                      <input
+                        type="text"
+                        onChange={(event) => {
+                          setColors(event.target.value)
+                        }}
+                        placeholder="Colors' codes"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Open time:</label>
+                      <input
+                        type="datetime-local"
+                        onChange={(event) => {
+                          setForm({ ...form, openTime: event.target.value })
+                        }}
+                        placeholder="Placeholder"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Close time:</label>
+                      <input
+                        type="datetime-local"
+                        onChange={(event) => {
+                          setForm({ ...form, closeTime: event.target.value })
+                        }}
+                        placeholder="Placeholder"
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <Upload />
+                  </div>
+                  {/*footer*/}
+                  <div className="flex items-center justify-end p-6 rounded-b">
+                    <button
+                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setIsShow(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={handleSubmit}
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
       </div>
     </div>
   )

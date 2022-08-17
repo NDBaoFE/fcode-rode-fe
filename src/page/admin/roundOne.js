@@ -36,8 +36,8 @@ const RoundOne = () => {
   useEffect(() => {
     const getCodeOne = async () => {
       const token = LocalStorageUtils.getItem('token')
-      const res1 = await adminApi.getRank('1', token)
-      const res2 = await adminApi.getRank('1', token)
+      const res1 = await adminApi.getRank('CSSBattle_109_2', token)
+      const res2 = await adminApi.getRank('CSSBattle_109_2', token)
       setCodeOne(res1.data)
       setCodeTwo(res2.data)
     }
