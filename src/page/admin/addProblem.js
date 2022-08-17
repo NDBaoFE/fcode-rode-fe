@@ -53,6 +53,7 @@ const AddProblem = () => {
       const token = LocalStorageUtils.getItem('token')
       const res = await adminApi.getAllProblem(token)
       setProblem(res.data)
+      console.log(res)
     }
     getProblem()
   }, [])
@@ -233,7 +234,7 @@ const AddProblem = () => {
         <div className="pl-[240px] w-full flex mt-10">
           <div className="mx-auto">
             <button
-              className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className="bg-[#A9DDE5] text-[#54585C] font-bold uppercase text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => setIsShow(true)}
             >
@@ -305,7 +306,7 @@ const AddProblem = () => {
                       <input
                         type="datetime-local"
                         onChange={(event) => {
-                          setForm({ ...form, openTime: event.target.value })
+                          setForm({ ...form, openTime: new Date(event.target.value) })
                         }}
                         placeholder="Placeholder"
                         className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
@@ -316,7 +317,7 @@ const AddProblem = () => {
                       <input
                         type="datetime-local"
                         onChange={(event) => {
-                          setForm({ ...form, closeTime: event.target.value })
+                          setForm({ ...form, closeTime: new Date(event.target.value) })
                         }}
                         placeholder="Placeholder"
                         className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
@@ -327,7 +328,7 @@ const AddProblem = () => {
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 rounded-b">
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="text-red-500 opacity-75 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setIsShow(false)}
                     >
