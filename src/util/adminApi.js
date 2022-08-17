@@ -21,5 +21,20 @@ const adminApi = {
 
     return get(url, {}, { authorization: token })
   },
+  getAlgoRank: (id, token) => {
+    const url = `/algo/rank/${id}/500`
+
+    return get(url, {}, { authorization: token })
+  },
+  getAlgoFile: (id, token) => {
+    const url = `/algo/file/${id}`
+
+    return get(url, {}, { authorization: token })
+  },
+  createAlgo: (body, token) => {
+    const url = '/algo'
+
+    return post(url, body, {}, { authorization: token })
+  },
 }
 export default adminApi
