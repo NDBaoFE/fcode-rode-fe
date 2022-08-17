@@ -50,7 +50,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
-
+.CodeMirror-scroll{
+  overflow: hidden!important;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

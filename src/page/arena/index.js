@@ -56,7 +56,6 @@ function Arena() {
     const token = LocalStorageUtils.getItem('token')
     const path = await productApi.getProblem(problemId, token)
     setBattleTime(path.data.battleTime)
-    console.log(path.data)
     const openTime = new Date(`${path.data.openTime}`).getTime()
     LocalStorageUtils.setItem('darkmode', openTime)
     LocalStorageUtils.setItem('darkhorse', battleTime)
