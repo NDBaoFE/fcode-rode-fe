@@ -1,17 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Switch from './routes'
 
-import Arena from './page/arena'
-
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/arena/:id" element={<Arena />}>
-            {' '}
-          </Route>
-        </Routes>
-      </Router>
+      <Switch></Switch>
     </div>
   )
 }
