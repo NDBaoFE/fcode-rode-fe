@@ -68,6 +68,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
+  /* justify-content: space-between; */
   left: 0;
   position: fixed;
   bottom: 0;

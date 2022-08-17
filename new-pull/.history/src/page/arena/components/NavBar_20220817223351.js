@@ -41,10 +41,10 @@ function NavBar({ children }) {
     <Container>
       <LeftNavBar>
         <Logo src={logo}></Logo>
-        <Text>F-Code</Text>
+        <Text>F - Code</Text>
       </LeftNavBar>
       <NavBarItem>
-        <h2 className="level">
+        <h2 className="level" style={{ display: 'inline-block' }}>
           <a href="#">Battle #19</a>
         </h2>
         <details className="problem-dropbox">
@@ -53,7 +53,7 @@ function NavBar({ children }) {
         </details>
       </NavBarItem>
       <NavBarItem>
-        <h4 className="header_title header__title--inner">TIMERS: </h4>
+        <h4 className="header_title">TIMERS: </h4>
         <CountdownTimer targetDate={ExpiredTime} />
       </NavBarItem>
       <div>{children}</div>
@@ -68,6 +68,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
+  /* justify-content: space-between; */
   left: 0;
   position: fixed;
   bottom: 0;
@@ -80,6 +81,8 @@ const Container = styled.div`
 const LeftNavBar = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 0;
 `
 const Logo = styled.img`
   width: 45px;
@@ -87,10 +90,12 @@ const Logo = styled.img`
 `
 const NavBarItem = styled.div`
   width: var(--nav-bar-width);
-  padding: 0 12px;
+  padding: 12px;
   box-sizing: border-box;
 `
 export const Text = styled.h2`
   color: #fff;
   margin-left: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
 `
