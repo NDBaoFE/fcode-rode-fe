@@ -1,3 +1,5 @@
+import LocalStorageUtils from '../../../util/LocalStorageUtils'
+
 export const problems = [
   {
     id: 109,
@@ -48,5 +50,5 @@ export const problems = [
     colors: ['#293D7E', '#6E91CA'],
   },
 ]
-export const getStartTime = new Date().getTime()
-export const getExpiredTime = getStartTime + 30 * 60 * 1000
+export const getStartTime = LocalStorageUtils.getItem('darkmode')
+export const getExpiredTime = getStartTime + parseInt(LocalStorageUtils.getItem('darkhorse')) * 1000

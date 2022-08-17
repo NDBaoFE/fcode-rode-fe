@@ -14,7 +14,6 @@ import TargetHeader from './components/TargetHeader'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 import './index.css'
-import { lastScore, highScore } from './store/CodeMaterial'
 import { getExpiredTime } from './store/dtb'
 
 import { htmlLanguage } from '@codemirror/lang-html'
@@ -24,13 +23,16 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function Arena() {
   const [code, setCode] = useState(window.localStorage.getItem('code') || '')
+  const [battleTime, setBattleTime] = useState(0)
+  const [openTime, setOpenTime] = useState(0)
   const [count, setCount] = useState(0)
   const [slideChecked, setSlideChecked] = useState(false)
   const [diffChecked, setDiffChecked] = useState(false)
+  const [score, setScore] = useState('You havent submit anything')
   const [imgPath, setImgPath] = useState('')
-
   const imgLink = LocalStorageUtils.getItem('image')
-
+  const problemId = LocalStorageUtils.getItem('problemId')
+  const disbaledButton = LocalStorageUtils.getItem('plsdontdeletethis')
   const colors = LocalStorageUtils.getItem('colors')
 
   const changeSlideCheckBoxValue = () => {
@@ -49,7 +51,14 @@ function Arena() {
     const token = LocalStorageUtils.getItem('token')
     const path = await productApi.getImage(imgLink, token)
     setImgPath(path.data)
-    console.log(imgPath)
+  }
+  const getProblem = async () => {
+    const token = LocalStorageUtils.getItem('token')
+    const path = await productApi.getProblem(problemId, token)
+    setBattleTime(path.data.battleTime)
+    const openTime = new Date(`${path.data.openTime}`).getTime()
+    LocalStorageUtils.setItem('darkmode', openTime)
+    LocalStorageUtils.setItem('darkhorse', battleTime)
   }
   //render everytime the codechange
   useEffect(() => {
@@ -57,6 +66,7 @@ function Arena() {
   }, [code])
   useEffect(() => {
     getImg()
+    getProblem()
   })
 
   //get colorlist from dtb
@@ -89,9 +99,13 @@ function Arena() {
       iframeRef.current.style.width = '400px'
     }
   }
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const realtime = new Date().getTime()
     alert(`${getExpiredTime - realtime}`)
+    const token = LocalStorageUtils.getItem('token')
+    const score1 = await productApi.submit(problemId, code, token)
+    let score = score1.data.score.toFixed(3)
+    setScore(score)
   }
 
   return (
@@ -110,11 +124,7 @@ function Arena() {
           <div className="score-container">
             <div>
               <p className="score-container__score-type">Last Score:</p>
-              <p className="score-container__score">{lastScore}</p>
-            </div>
-            <div>
-              <p className="score-container__score-high-type">High Score:</p>
-              <p className="score-container__score">{highScore}</p>
+              <p className="score-container__score">{score}</p>
             </div>
           </div>
         </div>
@@ -131,14 +141,13 @@ function Arena() {
             options={{ lineWrapping: 'true', lineNumbers: 'true' }}
             onChange={(e) => {
               setCode(e)
-
               setCount(e.length)
             }}
           />
           <div className="btn-group">
-            <div className="submit-btn" onClick={handleSubmit}>
+            <button className="submit-btn" onClick={handleSubmit} disabled={disbaledButton}>
               Submit
-            </div>
+            </button>
           </div>
         </Editor>
         <OutPut>
@@ -168,18 +177,13 @@ function Arena() {
                 onMouseLeave={resetWidth}
               ></div>
               <div id="img-layer" className="img-layer" ref={imgRef}>
-                <img
-                  src={`data:image/png;base64,${imgPath}`}
-                  width="400px"
-                  height="300px"
-                  alt="level1"
-                />
+                <img src={`${imgPath}`} width="400px" height="300px" alt="level1" />
               </div>
             </div>
             <Target>
               <TargetHeader></TargetHeader>
               <TargetContent>
-                <img src={`data:image/png;base64,${imgPath}`} className="target_img" />
+                <img src={`${imgPath}`} className="target_img" />
               </TargetContent>
             </Target>
           </OutPutContent>
