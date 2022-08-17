@@ -3,7 +3,7 @@ import Switch from './routes'
 const App = () => {
   return (
     <div className="App">
-      <Switch></Switch>
+      <Switch />
     </div>
   )
 }
