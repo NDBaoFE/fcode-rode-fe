@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
+import LocalStorageUtils from '../../../util/LocalStorageUtils'
 import { useCountdown } from './CountDown'
 import DateTimeDisplay from './DateTimeDisplay'
 
@@ -12,6 +13,8 @@ const ExpiredNotice = () => {
 }
 
 const ShowCounter = ({ minutes, seconds }) => {
+  const [expired, setExpired] = useState(false)
+  LocalStorageUtils.setItem('plsdontdeletethis', expired)
   return (
     <div className="show-counter">
       <div className="countdown-link">
@@ -31,6 +34,7 @@ const CountdownTimer = ({ targetDate }) => {
   const [minutes, seconds] = useCountdown(targetDate)
 
   if (minutes + seconds <= 0) {
+    setExpired(true)
     return <ExpiredNotice />
   } else {
     return <ShowCounter minutes={minutes} seconds={seconds} />

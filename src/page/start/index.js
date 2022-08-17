@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
+import { toast, ToastContainer } from 'react-toastify'
+
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 const Start = () => {
   const [code, setCode] = useState('')
@@ -18,8 +22,12 @@ const Start = () => {
   }, [tokenImage])
   const handleSubmit = async () => {
     const token = LocalStorageUtils.getItem('token')
-    const res = await productApi.startBattle(code, token)
-    console.log(res.data)
+    try {
+      const res = await productApi.startBattle(code, token)
+    } catch (error) {
+      toast.error('Wrong code!!, Please try again')
+    }
+
     LocalStorageUtils.setItem('image', res.data.problem.image)
     LocalStorageUtils.setItem('colors', res.data.problem.colors)
     LocalStorageUtils.setItem('problemId', res.data.problem.problemId)
@@ -77,6 +85,18 @@ const Start = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   )
 }
