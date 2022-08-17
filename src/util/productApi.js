@@ -17,6 +17,16 @@ const productApi = {
     const url = `/submit`
     return post(url, {}, {}, { authorization: token })
   },
+  submitAlgorithm: (token, body) => {
+    const url = '/algo/submit'
+
+    return post(url, body, {}, { authorization: token })
+  },
+  getAlgo: (token, id) => {
+    const url = `/algo/${id}`
+
+    return get(url, {}, { authorization: token })
+  },
 }
 
 export default productApi
