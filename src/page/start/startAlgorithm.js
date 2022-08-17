@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
 import LocalStorageUtils from '../../util/LocalStorageUtils'
+import productApi from '../../util/productApi'
 
 const StartAlgorithm = () => {
+  const token = LocalStorageUtils.getItem('token')
   const [code, setCode] = useState('')
 
   const handleInputChange = (value) => {
@@ -10,7 +12,10 @@ const StartAlgorithm = () => {
   }
 
   const handleSubmit = async () => {
-    alert('Entered: ' + code === '' ? 'nothing' : code)
+    const res = await productApi.getAlgo(token, code)
+    LocalStorageUtils.setItem('algoId', res.data.algoId)
+    LocalStorageUtils.setItem('templateLink', res.data.templateLink)
+    return (window.location = '/algorithm/start')
   }
   const handleLogOut = () => {
     LocalStorageUtils.deleteUser()
