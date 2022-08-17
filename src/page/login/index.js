@@ -68,11 +68,6 @@ const Login = () => {
       </div>
     )
   }
-
-  const responseGoogle = (response) => {
-    console.log(response)
-  }
-
   return (
     <div className="h-screen bg-home bg-cover">
       <div className="h-screen w-screen flex">
