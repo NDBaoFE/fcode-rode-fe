@@ -43,6 +43,8 @@ const AddProblem = () => {
     const res = await adminApi.createProblem(token, formData)
     if (res.status === 201) {
       setIsShow(false)
+      const res = await adminApi.getAllProblem(token)
+      setProblem(res.data)
     }
   }
 
