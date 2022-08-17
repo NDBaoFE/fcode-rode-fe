@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 
 import Admin from '../page/admin'
@@ -37,7 +35,13 @@ const Switch = () => {
   ]
 
   const RenderPublicRoutes = () => {
-    return !user || user.sub.name?.length <= 0 ? <Outlet /> : <Navigate to="/" replace />
+    return !user || user.sub.name?.length <= 0 ? (
+      <Outlet />
+    ) : user.sub.userData?.role === 'admin' ? (
+      <Navigate to="/admin" replace />
+    ) : (
+      <Navigate to="/" replace />
+    )
   }
 
   const RenderPrivateRoutes = () => {
@@ -45,8 +49,7 @@ const Switch = () => {
   }
 
   const RenderAdminRoutes = () => {
-    return <Outlet />
-    // return user && user.id?.length >= 0 ? <Outlet /> : <Navigate to="/" replace />;
+    return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/" replace />
   }
 
   return (

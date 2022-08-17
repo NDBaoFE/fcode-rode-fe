@@ -1,16 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+
+import { gapi } from 'gapi-script'
+import { GoogleLogin } from 'react-google-login'
+
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+import productApi from '../../util/productApi'
 
 const AdminLogin = () => {
-  const [account, setAccount] = useState({ username: '', password: '' })
-
-  const handleFormChange = (event) => {
-    // console.log(event)
-    setAccount({ ...account, [event.target.name]: event.target.value })
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: '977769293513-67s7vl5ij0nrvpafqliamobp1hhocrja.apps.googleusercontent.com',
+        scope: 'email',
+      })
+    }
+    gapi.load('client:auth2', start)
+  }, [])
+  const onSuccess = async (response) => {
+    const token = response.tokenId
+    const res = await productApi.login(token)
+    LocalStorageUtils.setItem('token', res.data.tokens.access.token)
+    return (window.location = '/admin')
   }
-
-  const handleSubmit = () => {
-    alert(account.username + ' ' + account.password)
-  }
+  const onFailure = (response) => {}
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -20,47 +32,24 @@ const AdminLogin = () => {
             <div className="mx-auto relative py-6 w-full">
               <div className="absolute top-[7rem] mx-auto w-full text-center item-center">
                 {/* <img src={Avatar} alt="Avatar" className="w-1/4 mx-auto rounded-lg" /> */}
-                <h2 className="text-xl pt-6 pb-2 text">
+                <h2 className="text-xl pb-2 text">
                   <span className="font-black">R.ODE Battle</span>
                 </h2>
-                <h3 className="text-xs">Managing page for ad</h3>
-                <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-6"></div>
-                <div className="my-2">
-                  <input
-                    type="text"
-                    name="username"
-                    value={account.username}
-                    onChange={(event) => handleFormChange(event)}
-                    placeholder="Username"
-                    className="border border-0-[#11181C] bg-[#68707610] text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none"
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter') {
-                        handleSubmit()
-                      }
-                    }}
-                  />
-                </div>
-                <div className="my-2">
-                  <input
-                    type="password"
-                    name="password"
-                    value={account.password}
-                    onChange={(event) => handleFormChange(event)}
-                    placeholder="Password"
-                    className="border border-0-[#11181C] bg-[#68707610] text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none"
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter') {
-                        handleSubmit()
-                      }
-                    }}
-                  />
-                </div>
-                <div
-                  onClick={handleSubmit}
-                  className="p-2 my-6 text-white bg-[#1b171f] text-sm w-1/4 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] hover:bg-[#4e425f] duration-300 "
-                >
-                  Log in
-                </div>
+                <h3 className="text-xs">Managing page for admin</h3>
+                <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-10"></div>
+                <GoogleLogin
+                  clientId="977769293513-67s7vl5ij0nrvpafqliamobp1hhocrja.apps.googleusercontent.com"
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                  render={(props) => (
+                    <div
+                      onClick={props.onClick}
+                      className="p-2 bg-[#68707610] text-sm border border-0-[#11181C] w-2/3 mx-auto rounded-lg cursor-pointer hover:bg-[#6870762d] duration-300"
+                    >
+                      Sign in with Google account ⇀
+                    </div>
+                  )}
+                />
               </div>
               <div className="absolute bottom-6 mx-auto w-full text-center">
                 <h4 className="text-xs">
