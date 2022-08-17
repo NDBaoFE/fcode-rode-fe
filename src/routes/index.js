@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Admin from '../page/admin'
 import AddProblem from '../page/admin/addProblem'
 import AdminLogin from '../page/admin/adminLogin'
+import ManageAlgo from '../page/admin/manageAlgo'
 import RoundFour from '../page/admin/roundFour'
 import RoundOne from '../page/admin/roundOne'
 import RoundThree from '../page/admin/roundThree'
@@ -43,12 +44,13 @@ const Switch = () => {
     { path: '/admin/roundThree', element: <RoundThree /> },
     { path: '/admin/roundFour', element: <RoundFour /> },
     { path: '/admin/manageProblem', element: <AddProblem /> },
+    { path: '/admin/manageAlgo', element: <ManageAlgo /> },
   ]
 
   const RenderPublicRoutes = () => {
-    return !user || user.sub.name?.length <= 0 ? (
+    return !user || user?.sub.name.length <= 0 ? (
       <Outlet />
-    ) : user.sub.userData?.role === 'admin' ? (
+    ) : user?.sub.userData.role === 'admin' ? (
       <Navigate to="/admin" replace />
     ) : (
       <Navigate to="/" replace />
@@ -67,7 +69,7 @@ const Switch = () => {
   }
 
   const RenderAdminRoutes = () => {
-    return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/css" replace />
+    return user?.sub.userData.role === 'admin' ? <Outlet /> : <Navigate to="/css" replace />
   }
 
   return (

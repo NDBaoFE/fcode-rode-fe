@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
@@ -9,6 +9,12 @@ const Algorithm = () => {
   const templateLink = LocalStorageUtils.getItem('templateLink')
   const [file, setFile] = useState(null)
   const [isShow, setIsShow] = useState(false)
+  useEffect(() => {
+    const algoId = LocalStorageUtils.getItem('algoId')
+    if (algoId === null) {
+      return (window.location = '/algorithm')
+    }
+  }, [])
 
   const handleSubmit = async () => {
     const body = new FormData()
