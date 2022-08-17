@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import LocalStorageUtils from '../../util/LocalStorageUtils'
+import productApi from '../../util/productApi'
 
 const Start = () => {
   const [code, setCode] = useState('')
@@ -8,9 +9,21 @@ const Start = () => {
   const handleInputChange = (value) => {
     setCode(value)
   }
+  let tokenImage = LocalStorageUtils.getItem('image')
 
+  useEffect(() => {
+    if (tokenImage !== null) {
+      window.location = '/arena'
+    }
+  }, [tokenImage])
   const handleSubmit = async () => {
-    alert('Entered: ' + code === '' ? 'nothing' : code)
+    const token = LocalStorageUtils.getItem('token')
+    const res = await productApi.startBattle(code, token)
+    console.log(res.data)
+    LocalStorageUtils.setItem('image', res.data.problem.image)
+    LocalStorageUtils.setItem('colors', res.data.problem.colors)
+    LocalStorageUtils.setItem('problemId', res.data.problem.problemId)
+    return (window.location = '/arena')
   }
   const handleLogOut = () => {
     LocalStorageUtils.deleteUser()

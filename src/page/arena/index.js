@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { useParams } from 'react-router-dom'
 import { FacebookShareButton } from 'react-share'
 import { ToastContainer, toast } from 'react-toastify'
 import styled from 'styled-components'
@@ -12,9 +11,11 @@ import NavBar from './components/NavBar'
 import OutPutHeader from './components/OutPutHeader'
 import TargetHeader from './components/TargetHeader'
 
+import LocalStorageUtils from '../../util/LocalStorageUtils'
+import productApi from '../../util/productApi'
 import './index.css'
 import { lastScore, highScore } from './store/CodeMaterial'
-import { getExpiredTime, problems } from './store/dtb'
+import { getExpiredTime } from './store/dtb'
 
 import { htmlLanguage } from '@codemirror/lang-html'
 import FacebookIcon from '@mui/icons-material/Facebook'
@@ -23,21 +24,15 @@ import CodeMirror from '@uiw/react-codemirror'
 import 'react-toastify/dist/ReactToastify.css'
 
 function Arena() {
-  const [code, setCode] = useState(window.localStorage.getItem('code'))
+  const [code, setCode] = useState(window.localStorage.getItem('code') || '')
   const [count, setCount] = useState(0)
   const [slideChecked, setSlideChecked] = useState(false)
   const [diffChecked, setDiffChecked] = useState(false)
-  const { id } = useParams()
+  const [imgPath, setImgPath] = useState('')
 
-  let path = ''
-  let colors = []
+  const imgLink = LocalStorageUtils.getItem('image')
 
-  for (let problem of problems) {
-    if (problem.id == id) {
-      path = problem.path
-      colors = problem.colors
-    }
-  }
+  const colors = LocalStorageUtils.getItem('colors')
 
   const changeSlideCheckBoxValue = () => {
     setSlideChecked((state) => !state)
@@ -51,11 +46,19 @@ function Arena() {
   const imgRef = useRef()
   const outputContainerRef = useRef()
   const iframeRef = useRef()
-
+  const getImg = async () => {
+    const token = LocalStorageUtils.getItem('token')
+    const path = await productApi.getImage(imgLink, token)
+    setImgPath(path.data)
+    console.log(imgPath)
+  }
   //render everytime the codechange
   useEffect(() => {
     window.localStorage.setItem('code', code)
   }, [code])
+  useEffect(() => {
+    getImg()
+  })
 
   //get colorlist from dtb
   const listOfColor = colors.map((color) => (
@@ -107,6 +110,7 @@ function Arena() {
             options={{ lineWrapping: 'true', lineNumbers: 'true' }}
             onChange={(e) => {
               setCode(e)
+
               setCount(e.length)
             }}
           />
@@ -143,7 +147,12 @@ function Arena() {
                 onMouseLeave={resetWidth}
               ></div>
               <div id="img-layer" className="img-layer" ref={imgRef}>
-                <img src={path} width="400px" height="300px" alt="level1" />
+                <img
+                  src={`data:image/png;base64,${imgPath}`}
+                  width="400px"
+                  height="300px"
+                  alt="level1"
+                />
               </div>
             </div>
             <div className="inner-header">
@@ -178,7 +187,7 @@ function Arena() {
         <Target>
           <TargetHeader></TargetHeader>
           <TargetContent>
-            <img src={path} className="target_img" />
+            <img src={`data:image/png;base64,${imgPath}`} className="target_img" />
             <div className="inner-header">
               <h4 className="header_title header__title--inner">Colors to use</h4>
               <div className="colors-list ">{listOfColor}</div>
