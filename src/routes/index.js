@@ -7,9 +7,12 @@ import RoundFour from '../page/admin/roundFour'
 import RoundOne from '../page/admin/roundOne'
 import RoundThree from '../page/admin/roundThree'
 import RoundTwo from '../page/admin/roundTwo'
+import Algorithm from '../page/algorithm'
 import Arena from '../page/arena'
 import Login from '../page/login'
+import AlgorithmLogin from '../page/login/algorithm'
 import Start from '../page/start'
+import StartAlgorithm from '../page/start/startAlgorithm'
 import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
@@ -17,14 +20,20 @@ const Switch = () => {
   const problemId = LocalStorageUtils.getItem('problemId')
   const privateRoutes = [
     {
-      path: '/',
+      path: '/css',
       element: <Start />,
     },
+    {
+      path: '/algorithm',
+      element: <StartAlgorithm />,
+    },
+    { path: '/algorithm/start', element: <Algorithm /> },
   ]
   const arenaRoutes = [{ path: '/arena', element: <Arena /> }]
   const publicRoutes = [
-    { path: '/login', element: <Login /> },
+    { path: '/login/css', element: <Login /> },
     { path: '/login/admin', element: <AdminLogin /> },
+    { path: '/login/algorithm', element: <AlgorithmLogin /> },
   ]
 
   const adminRoutes = [
@@ -47,7 +56,7 @@ const Switch = () => {
   }
 
   const RenderPrivateRoutes = () => {
-    return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login" replace />
+    return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login/css" replace />
   }
   const RenderArenaRoutes = () => {
     if (user && user.sub.name?.length >= 0) {
@@ -58,7 +67,7 @@ const Switch = () => {
   }
 
   const RenderAdminRoutes = () => {
-    return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/" replace />
+    return user.sub.userData?.role === 'admin' ? <Outlet /> : <Navigate to="/css" replace />
   }
 
   return (
@@ -78,12 +87,13 @@ const Switch = () => {
           <Route path={route.path} element={route.element} key={idx}></Route>
         ))}
       </Route>
+
       <Route element={<RenderArenaRoutes />}>
         {arenaRoutes.map((route, idx) => (
           <Route path={route.path} element={route.element} key={idx}></Route>
         ))}
       </Route>
-      <Route path="*" element={<Navigate to="/" replace />}></Route>
+      <Route path="*" element={<Navigate to="/css" replace />}></Route>
     </Routes>
   )
 }

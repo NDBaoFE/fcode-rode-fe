@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { gapi } from 'gapi-script'
 import { GoogleLogin } from 'react-google-login'
 
-import Avatar from '../../assets/img/avatar.png'
+import Avatar from '../../assets/img/avatar-black.png'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 
-const Login = () => {
+const AlgorithmLogin = () => {
   useEffect(() => {
     function start() {
       gapi.client.init({
@@ -22,21 +22,21 @@ const Login = () => {
     const token = response.tokenId
     const res = await productApi.login(token)
     LocalStorageUtils.setItem('token', res.data.tokens.access.token)
-    return (window.location = '/')
+    return (window.location = '/algorithm')
   }
   const onFailure = (response) => {}
 
   const LoginBox = () => {
     return (
-      <div className="m-auto w-[28rem] h-[40rem] bg-modal rounded-lg shadow-lg">
+      <div className="m-auto w-[28rem] h-[40rem] shadow-2xl bg-white rounded-lg ">
         <div className="flex h-full">
           <div className="mx-auto relative py-6 w-full">
-            <div className="absolute top-[7rem] mx-auto w-full text-center text-white item-center">
-              <img src={Avatar} alt="Avatar" className="w-1/4 mx-auto rounded-lg" />
+            <div className="absolute top-[7rem] mx-auto w-full text-center item-center">
+              <img src={Avatar} alt="Avatar" className="w-1/4 mx-auto rounded-lg p-1" />
               <h2 className="text-xl pt-6 pb-2 text">
                 Welcome to <span className="font-black">R.ODE Battle.</span>
               </h2>
-              <h3 className="text-xs">R.ODE Battle CSS branch.</h3>
+              <h3 className="text-xs font-semibold">R.ODE Battle Algorithm branch.</h3>
               <div className="border border-[#C4C4C4] border-b-0 w-1/4 mx-auto my-6"></div>
               <GoogleLogin
                 clientId="977769293513-67s7vl5ij0nrvpafqliamobp1hhocrja.apps.googleusercontent.com"
@@ -45,21 +45,21 @@ const Login = () => {
                 render={(props) => (
                   <div
                     onClick={props.onClick}
-                    className="p-2 bg-[#1b171f] text-sm text-[#777777] w-2/3 mx-auto rounded-lg cursor-pointer hover:text-[#f7f7f7] duration-300"
+                    className="p-2 bg-[#68707610] text-sm border border-0-[#11181C] w-2/3 mx-auto rounded-lg cursor-pointer hover:bg-[#6870762d] duration-300"
                   >
                     Sign in with Google account ⇀
                   </div>
                 )}
               />
             </div>
-            <div className="absolute bottom-6 mx-auto w-full text-center text-white">
+            <div className="absolute bottom-6 mx-auto w-full text-center">
               <h4 className="text-xs">
                 Wrong branch?{' '}
                 <a
-                  href="/login/algorithm"
+                  href="/login/css"
                   className="font-semibold ease-in-out duration-300 hover:opacity-80 cursor-pointer"
                 >
-                  Move to Algorithm branch.
+                  Move to CSS branch.
                 </a>
               </h4>
             </div>
@@ -69,7 +69,7 @@ const Login = () => {
     )
   }
   return (
-    <div className="h-screen bg-home bg-cover">
+    <div className="h-screen bg-gray-50">
       <div className="h-screen w-screen flex">
         <LoginBox />
       </div>
@@ -77,4 +77,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default AlgorithmLogin
