@@ -45,7 +45,7 @@ function NavBar({ children }) {
       </LeftNavBar>
       <NavBarItem>
         <h4 className="header_title">TIMERS: </h4>
-        <CountdownTimer targetDate={ExpiredTime} />
+        {getExpiredTime && <CountdownTimer targetDate={ExpiredTime} />}
       </NavBarItem>
       <div>{children}</div>
     </Container>
