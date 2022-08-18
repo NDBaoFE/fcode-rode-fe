@@ -21,42 +21,47 @@ import CodeMirror from '@uiw/react-codemirror'
 import 'react-toastify/dist/ReactToastify.css'
 
 function Arena(props) {
-  const [code, setCode] = useState(window.localStorage.getItem('code') || '')
+  const [code, setCode] = useState('')
   const [count, setCount] = useState(0)
   const [slideChecked, setSlideChecked] = useState(false)
   const [diffChecked, setDiffChecked] = useState(false)
   const [score, setScore] = useState('You havent submit anything')
   const [imgPath, setImgPath] = useState('')
-  const imgLink = LocalStorageUtils.getItem('image')
   const problemId = LocalStorageUtils.getItem('problemId')
   const disbaledButton = LocalStorageUtils.getItem('plsdontdeletethis')
   const colors = LocalStorageUtils.getItem('colors')
-
   const changeSlideCheckBoxValue = () => {
     setSlideChecked((state) => !state)
   }
   const changeDiffCheckBoxValue = () => {
     setDiffChecked((state) => !state)
   }
-  console.log(props.expiredTime)
   //ref
   const userOutPutRef = useRef()
   const imgRef = useRef()
   const outputContainerRef = useRef()
   const iframeRef = useRef()
-  const getImg = async () => {
-    const token = LocalStorageUtils.getItem('token')
-    const path = await productApi.getImage(imgLink, token)
-    setImgPath(path.data)
-  }
 
   //render everytime the codechange
   useEffect(() => {
-    window.localStorage.setItem('code', code)
-  }, [code])
+    setCode(window.localStorage.getItem('code') || '')
+  }, [])
   useEffect(() => {
-    getImg()
+    const interval = setInterval(() => {
+      LocalStorageUtils.setItem('code', code)
+    }, 5000)
+    return () => clearInterval(interval)
   })
+
+  useEffect(() => {
+    const getImg = async () => {
+      const token = LocalStorageUtils.getItem('token')
+      const imgLink = LocalStorageUtils.getItem('image')
+      const path = await productApi.getImage(imgLink, token)
+      setImgPath(path.data)
+    }
+    getImg()
+  }, [])
 
   //get colorlist from dtb
   const listOfColor = colors.map((color) => (
@@ -89,10 +94,11 @@ function Arena(props) {
     }
   }
   const handleSubmit = async () => {
-    toast.success('Submitted successfully!! ')
+    LocalStorageUtils.setItem('code', code)
     const token = LocalStorageUtils.getItem('token')
     const score1 = await productApi.submit(problemId, code, token)
     let score = score1.data.score.toFixed(3)
+    toast.success('Submitted successfully!!')
     setScore(score)
   }
 
