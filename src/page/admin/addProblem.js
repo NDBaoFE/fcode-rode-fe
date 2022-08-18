@@ -72,52 +72,22 @@ const AddProblem = () => {
         <ul className="relative pt-5">
           <li className="relative">
             <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundOne"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 1
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundTwo"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 2
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundThree"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 3
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundFour"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 4
-            </a>
-          </li>
-          <li className="relative">
-            <a
               className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
               href="/admin/manageProblem"
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
             >
-              Manage problems
+              Manage CSS problems
+            </a>
+          </li>
+          <li className="relative">
+            <a
+              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+              href="/admin/manageCss"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+            >
+              Manage CSS rank
             </a>
           </li>
           <li className="relative">
@@ -127,7 +97,7 @@ const AddProblem = () => {
               data-mdb-ripple="true"
               data-mdb-ripple-color="dark"
             >
-              Manage algorithm
+              Manage Algorithm rank
             </a>
           </li>
         </ul>
