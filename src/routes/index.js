@@ -18,7 +18,6 @@ import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
   const user = LocalStorageUtils.getUser()
-  const problemId = LocalStorageUtils.getItem('problemId')
   const privateRoutes = [
     {
       path: '/css',
@@ -58,10 +57,10 @@ const Switch = () => {
   }
 
   const RenderPrivateRoutes = () => {
-    return user && user.sub.name?.length >= 0 ? <Outlet /> : <Navigate to="/login/css" replace />
+    return user && user?.sub.name.length >= 0 ? <Outlet /> : <Navigate to="/login/css" replace />
   }
   const RenderArenaRoutes = () => {
-    if (user && user.sub.name?.length >= 0) {
+    if (user && user?.sub.name.length >= 0) {
       return <Outlet />
     } else {
       return <Navigate to="/" replace />
