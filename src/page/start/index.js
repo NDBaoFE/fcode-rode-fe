@@ -7,7 +7,7 @@ import productApi from '../../util/productApi'
 
 import 'react-toastify/dist/ReactToastify.css'
 
-const Start = () => {
+const Start = (props) => {
   const [code, setCode] = useState('')
 
   const handleInputChange = (value) => {
@@ -28,6 +28,8 @@ const Start = () => {
     } catch (error) {
       toast.error('Wrong code!!, Please try again')
     } finally {
+      LocalStorageUtils.setItem('startTime', res.data.startTime)
+      LocalStorageUtils.setItem('battleTime', res.data.problem.battleTime)
       LocalStorageUtils.setItem('image', res.data.problem.image)
       LocalStorageUtils.setItem('colors', res.data.problem.colors)
       LocalStorageUtils.setItem('problemId', res.data.problem.problemId)

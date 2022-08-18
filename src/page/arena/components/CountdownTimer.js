@@ -37,8 +37,7 @@ const CountdownTimer = ({ targetDate }) => {
     if (expired == false) {
       setExpired(true)
     }
-    LocalStorageUtils.clear()
-    window.location = '/'
+    LocalStorageUtils.removeItem('image')
     return <ExpiredNotice />
   } else {
     return <ShowCounter minutes={minutes} seconds={seconds} />

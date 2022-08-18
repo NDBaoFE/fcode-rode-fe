@@ -14,17 +14,14 @@ import TargetHeader from './components/TargetHeader'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 import './index.css'
-import { getExpiredTime } from './store/dtb'
 
 import { htmlLanguage } from '@codemirror/lang-html'
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import CodeMirror from '@uiw/react-codemirror'
 import 'react-toastify/dist/ReactToastify.css'
 
-function Arena() {
+function Arena(props) {
   const [code, setCode] = useState(window.localStorage.getItem('code') || '')
-  const [battleTime, setBattleTime] = useState(0)
-  const [openTime, setOpenTime] = useState(0)
   const [count, setCount] = useState(0)
   const [slideChecked, setSlideChecked] = useState(false)
   const [diffChecked, setDiffChecked] = useState(false)
@@ -41,7 +38,7 @@ function Arena() {
   const changeDiffCheckBoxValue = () => {
     setDiffChecked((state) => !state)
   }
-
+  console.log(props.expiredTime)
   //ref
   const userOutPutRef = useRef()
   const imgRef = useRef()
@@ -52,21 +49,13 @@ function Arena() {
     const path = await productApi.getImage(imgLink, token)
     setImgPath(path.data)
   }
-  const getProblem = async () => {
-    const token = LocalStorageUtils.getItem('token')
-    const path = await productApi.getProblem(problemId, token)
-    setBattleTime(path.data.battleTime)
-    const openTime = new Date(`${path.data.openTime}`).getTime()
-    LocalStorageUtils.setItem('darkmode', openTime)
-    LocalStorageUtils.setItem('darkhorse', battleTime)
-  }
+
   //render everytime the codechange
   useEffect(() => {
     window.localStorage.setItem('code', code)
   }, [code])
   useEffect(() => {
     getImg()
-    getProblem()
   })
 
   //get colorlist from dtb
@@ -100,8 +89,7 @@ function Arena() {
     }
   }
   const handleSubmit = async () => {
-    const realtime = new Date().getTime()
-    alert(`${getExpiredTime - realtime}`)
+    toast.success('Submitted successfully!! ')
     const token = LocalStorageUtils.getItem('token')
     const score1 = await productApi.submit(problemId, code, token)
     let score = score1.data.score.toFixed(3)

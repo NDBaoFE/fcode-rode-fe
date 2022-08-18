@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import logo from '../../../assets/img/avatar.png'
 import bg from '../../../assets/img/bg.png'
-import { problems, getExpiredTime } from '../store/dtb'
+import LocalStorageUtils from '../../../util/LocalStorageUtils'
 import CountdownTimer from './CountdownTimer'
 
 function NavBar({ children }) {
@@ -15,27 +15,9 @@ function NavBar({ children }) {
   let colors = []
   const [value, setValue] = useState(name)
 
-  const ExpiredTime = getExpiredTime
-
-  for (let problem of problems) {
-    if (problem.id == id) {
-      name = problem.name
-      path = problem.path
-      colors = problem.colors
-    }
-  }
-
-  const handleClick = (e) => {
-    setValue(e.target.innerText)
-  }
-
-  //render list of problems from dtb
-  const list = problems.map(({ name, id }) => (
-    <Link onClick={handleClick} key={id} to={`/arena/${id}`}>
-      {' '}
-      <li className="problem">{name}</li>
-    </Link>
-  ))
+  const startTime = LocalStorageUtils.getItem('startTime')
+  const battleTime = LocalStorageUtils.getItem('battleTime')
+  let ExpiredTime = new Date(`${startTime}`).getTime() + battleTime * 1000
 
   return (
     <Container>
@@ -45,7 +27,7 @@ function NavBar({ children }) {
       </LeftNavBar>
       <NavBarItem>
         <h4 className="header_title">TIMERS: </h4>
-        {getExpiredTime && <CountdownTimer targetDate={ExpiredTime} />}
+        <CountdownTimer targetDate={ExpiredTime} />
       </NavBarItem>
       <div>{children}</div>
     </Container>

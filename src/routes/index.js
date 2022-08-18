@@ -17,7 +17,7 @@ import LocalStorageUtils from '../util/LocalStorageUtils'
 
 const Switch = () => {
   const user = LocalStorageUtils.getUser()
-  const problemId = LocalStorageUtils.getItem('problemId')
+
   const privateRoutes = [
     {
       path: '/css',
