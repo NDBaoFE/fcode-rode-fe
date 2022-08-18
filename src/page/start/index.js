@@ -29,6 +29,7 @@ const Start = (props) => {
       toast.error('Wrong code!!, Please try again')
     } finally {
       LocalStorageUtils.setItem('startTime', res.data.startTime)
+      LocalStorageUtils.removeItem('code')
       LocalStorageUtils.setItem('battleTime', res.data.problem.battleTime)
       LocalStorageUtils.setItem('image', res.data.problem.image)
       LocalStorageUtils.setItem('colors', res.data.problem.colors)
