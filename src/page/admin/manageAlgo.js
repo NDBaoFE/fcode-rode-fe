@@ -48,95 +48,12 @@ const ManageAlgo = () => {
     }
   }
 
-  const Sidebar = () => {
-    return (
-      <div className="w-60 h-full shadow-md bg-white px-1 absolute">
-        <div
-          onClick={signOut}
-          className="text-sm px-4 my-5 mx-2 flex items-center bg-gray-200 hover:bg-gray-300 duration-300 p-3 rounded-lg cursor-pointer"
-        >
-          Log out
-          <div className="ml-auto ">
-            <IoLogOutOutline />
-          </div>
-        </div>
-        <ul className="relative pt-5">
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundOne"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 1
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundTwo"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 2
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundThree"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 3
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/roundFour"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Round 4
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/manageProblem"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Manage problems
-            </a>
-          </li>
-          <li className="relative">
-            <a
-              className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
-              href="/admin/manageAlgo"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="dark"
-            >
-              Manage algorithm
-            </a>
-          </li>
-        </ul>
-      </div>
-    )
-  }
-
   const DataTable = () => {
     return (
-      <div className="py-2 inline-block min-w-full">
+      <div className="inline-block min-w-full">
         {/* start code one */}
         {codeOne && (
           <div className="pb-16">
-            <div className="flex">
-              <h3 className="mx-auto border-b-2 w-1/12 text-center py-3 font-semibold">
-                EXAM CODE 1
-              </h3>
-            </div>
             <div className="overflow-hidden">
               <table className="min-w-full">
                 <thead className="border-b">
@@ -165,6 +82,12 @@ const ManageAlgo = () => {
                     >
                       File
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Check
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -188,6 +111,9 @@ const ManageAlgo = () => {
                             Download
                           </div>
                         </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          <input type="checkbox" />
+                        </td>
                       </tr>
                     )
                   })}
@@ -204,40 +130,116 @@ const ManageAlgo = () => {
   return (
     <div className="min-h-screen min-w-screen bg-gray-50">
       <div className="w-full">
-        <Sidebar />
+        <div className="w-60 h-full shadow-md bg-white px-1 absolute">
+          <div
+            onClick={signOut}
+            className="text-sm px-4 my-5 mx-2 flex items-center bg-gray-200 hover:bg-gray-300 duration-300 p-3 rounded-lg cursor-pointer"
+          >
+            Log out
+            <div className="ml-auto ">
+              <IoLogOutOutline />
+            </div>
+          </div>
+          <ul className="relative pt-5">
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/roundOne"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Round 1
+              </a>
+            </li>
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/roundTwo"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Round 2
+              </a>
+            </li>
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/roundThree"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Round 3
+              </a>
+            </li>
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/roundFour"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Round 4
+              </a>
+            </li>
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/manageProblem"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Manage problems
+              </a>
+            </li>
+            <li className="relative">
+              <a
+                className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
+                href="/admin/manageAlgo"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="dark"
+              >
+                Manage algorithm
+              </a>
+            </li>
+            <li>
+              <div className="mx-auto my-4 flex flex-col">
+                <input
+                  type="text"
+                  className="bg-[#68707633] mx-auto text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
+                  placeholder="Exam code"
+                  value={code}
+                  onChange={(event) => {
+                    setCode(event.target.value)
+                  }}
+                />
+                <button
+                  onClick={handleSubmit}
+                  className="my-6 p-2 bg-[#1b171f] text-white text-sm font-bold mx-auto rounded-lg cursor-pointer hover:text-gray-300 hover:bg-[#231e29] duration-300"
+                >
+                  Get rank
+                </button>
+              </div>
+            </li>
+            <li>
+              <div className="w-full flex mt-10">
+                <div className="mx-auto">
+                  <button
+                    className="bg-[#A9DDE5] text-[#54585C] font-bold uppercase text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setIsShow(true)}
+                  >
+                    Add new problem
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
         <div className="pl-[240px] w-full">
           <div className="flex flex-col">
-            <div className="mx-auto my-4">
-              <input
-                type="text"
-                className="bg-[#68707633] text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
-                placeholder="Exam code"
-                value={code}
-                onChange={(event) => {
-                  setCode(event.target.value)
-                }}
-              />
-              <button
-                onClick={handleSubmit}
-                className="my-6 p-2 bg-[#1b171f] text-white text-sm font-bold mx-auto rounded-lg cursor-pointer hover:text-gray-300 hover:bg-[#231e29] duration-300"
-              >
-                Get rank
-              </button>
-            </div>
             <div className="overflow-x-auto">
               <DataTable />
             </div>
-          </div>
-        </div>
-        <div className="pl-[240px] w-full flex mt-10">
-          <div className="mx-auto">
-            <button
-              className="bg-[#A9DDE5] text-[#54585C] font-bold uppercase text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              onClick={() => setIsShow(true)}
-            >
-              Add new problem
-            </button>
           </div>
         </div>
         {isShow ? (
