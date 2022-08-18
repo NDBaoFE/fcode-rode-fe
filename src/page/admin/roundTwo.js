@@ -43,7 +43,7 @@ const RoundTwo = () => {
   useEffect(() => {
     const getRank = async () => {
       const token = LocalStorageUtils.getItem('token')
-      const res1 = await adminApi.getRank('RODE2022_FCODE_CSSV2_213213', token)
+      const res1 = await adminApi.getRank('RODE2022_FCODE_CSSV2_213213BU', token)
       const res2 = await adminApi.getRank('RODE2022_FCODE_CSSV2Ba1_297299', token)
       const res3 = await adminApi.getRank('RODE2022_FCODE_CSSV2Ba2_646950', token)
       setCodeOne(res1.data)
@@ -341,12 +341,12 @@ const RoundTwo = () => {
   }
 
   return (
-    <div className="min-h-screen min-w-screen bg-gray-50">
+    <div className="h-full min-w-screen bg-gray-50">
       <div className="w-full">
         <Sidebar />
         <div className="pl-[240px] w-full">
           <div className="flex flex-col">
-            <div className="overflow-x-auto">
+            <div className="">
               <DataTable />
             </div>
           </div>

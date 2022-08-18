@@ -28,13 +28,13 @@ const ManageAlgo = () => {
     const link = document.createElement('a')
     link.href = url
     if (id.includes('.java')) {
-      link.setAttribute('download', name + '|' + code + '.java')
+      link.setAttribute('download', name.split('@')[0].slice(-8) + '|' + code + '.java')
     } else if (id.includes('.c')) {
-      link.setAttribute('download', name + '|' + code + '.c')
+      link.setAttribute('download', name.split('@')[0].slice(-8) + '|' + code + '.c')
     } else if (id.includes('.cpp')) {
-      link.setAttribute('download', name + '|' + code + '.cpp')
+      link.setAttribute('download', name.split('@')[0].slice(-8) + '|' + code + '.cpp')
     } else {
-      link.setAttribute('download', name + '|' + code + '.txt')
+      link.setAttribute('download', name.split('@')[0].slice(-8) + '|' + code + '.txt')
     }
     document.body.appendChild(link)
     link.click()
@@ -182,7 +182,7 @@ const ManageAlgo = () => {
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <div
-                            onClick={() => handleDownload(player.lastSubmitFile, player.user.name)}
+                            onClick={() => handleDownload(player.lastSubmitFile, player.user.email)}
                             className="font-semibold cursor-pointer"
                           >
                             Download
