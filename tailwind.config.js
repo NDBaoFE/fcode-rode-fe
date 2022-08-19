@@ -7,7 +7,7 @@ module.exports = {
         box: '#EFEEF1',
       },
       backgroundImage: {
-        home: 'url("./assets/img/bg.svg")',
+        home: 'url("./assets/img/bg.png")',
       },
     },
   },
