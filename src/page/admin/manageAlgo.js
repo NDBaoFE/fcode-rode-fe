@@ -86,13 +86,13 @@ const ManageAlgo = () => {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      File
+                      Submit at
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Check
+                      File
                     </th>
                   </tr>
                 </thead>
@@ -110,15 +110,15 @@ const ManageAlgo = () => {
                           {player.user.email}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {new Date(player.submitAt).toLocaleString()}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <div
                             onClick={() => handleDownload(player.lastSubmitFile, player.user.email)}
                             className="font-semibold cursor-pointer"
                           >
                             Download
                           </div>
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          <input type="checkbox" />
                         </td>
                       </tr>
                     )
