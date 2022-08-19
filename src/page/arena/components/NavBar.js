@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-import logo from '../../../assets/img/avatar.png'
-import bg from '../../../assets/img/bg.png'
+import logo from '../../../assets/img/avatar.svg'
+import bg from '../../../assets/img/bg.svg'
 import LocalStorageUtils from '../../../util/LocalStorageUtils'
 import CountdownTimer from './CountdownTimer'
 
