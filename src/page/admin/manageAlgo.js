@@ -15,6 +15,7 @@ const ManageAlgo = () => {
     templateLink: '',
     openTime: '',
     closeTime: '',
+    algoId: null,
   })
 
   const handleSubmit = async () => {
@@ -236,6 +237,18 @@ const ManageAlgo = () => {
                           setForm({ ...form, templateLink: event.target.value })
                         }}
                         placeholder="https://drive.google.com/drive/..."
+                        className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                      />
+                    </div>
+                    <div className="mb-3 pt-0">
+                      <label className="text-sm text-gray-500 ml-3">Exam code:</label>
+                      <input
+                        type="text"
+                        value={form.algoId}
+                        onChange={(event) => {
+                          setForm({ ...form, algoId: event.target.value })
+                        }}
+                        placeholder="123456"
                         className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
                       />
                     </div>
