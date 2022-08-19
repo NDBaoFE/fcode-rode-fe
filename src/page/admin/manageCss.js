@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import adminApi from '../../util/adminApi'
@@ -20,6 +20,14 @@ const ManageCss = () => {
   })
   const [colors, setColors] = useState('')
   const [isShow, setIsShow] = useState(false)
+
+  useEffect(() => {
+    setInterval(async () => {
+      const token = LocalStorageUtils.getItem('token')
+      const res = await adminApi.getRank('RODE2022_FCODE_CSSV1_837162', token)
+      setCodeOne(res.data)
+    }, 3000)
+  }, [])
 
   const handleSubmitCode = async () => {
     const res = await adminApi.getRank(code, token)
@@ -188,7 +196,7 @@ const ManageCss = () => {
               <div className="mx-auto my-4 flex flex-col">
                 <input
                   type="text"
-                  className="bg-[#68707633] mx-auto text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
+                  className="bg-[#68707633] mx-auto text-sm w-full font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
                   placeholder="Exam code"
                   value={code}
                   onChange={(event) => {

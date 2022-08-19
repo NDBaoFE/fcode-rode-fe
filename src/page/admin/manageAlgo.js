@@ -181,7 +181,7 @@ const ManageAlgo = () => {
               <div className="mx-auto my-4 flex flex-col">
                 <input
                   type="text"
-                  className="bg-[#68707633] mx-auto text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
+                  className="bg-[#68707633] mx-auto w-full text-sm font-semibold py-2 px-4 rounded-lg focus:outline-none mr-3"
                   placeholder="Exam code"
                   value={code}
                   onChange={(event) => {
