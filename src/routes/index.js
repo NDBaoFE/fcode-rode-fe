@@ -10,9 +10,7 @@ import RoundThree from '../page/admin/roundThree'
 import RoundTwo from '../page/admin/roundTwo'
 import Algorithm from '../page/algorithm'
 import Arena from '../page/arena'
-import Login from '../page/login'
 import AlgorithmLogin from '../page/login/algorithm'
-import Start from '../page/start'
 import StartAlgorithm from '../page/start/startAlgorithm'
 import LocalStorageUtils from '../util/LocalStorageUtils'
 
@@ -21,10 +19,6 @@ const Switch = () => {
 
   const privateRoutes = [
     {
-      path: '/css',
-      element: <Start />,
-    },
-    {
       path: '/algorithm',
       element: <StartAlgorithm />,
     },
@@ -32,7 +26,6 @@ const Switch = () => {
   ]
   const arenaRoutes = [{ path: '/arena', element: <Arena /> }]
   const publicRoutes = [
-    { path: '/login/css', element: <Login /> },
     { path: '/login/admin', element: <AdminLogin /> },
     { path: '/login/algorithm', element: <AlgorithmLogin /> },
   ]
@@ -53,23 +46,27 @@ const Switch = () => {
     ) : user?.sub.userData.role === 'admin' ? (
       <Navigate to="/admin" replace />
     ) : (
-      <Navigate to="/" replace />
+      <Navigate to="/algorithm" replace />
     )
   }
 
   const RenderPrivateRoutes = () => {
-    return user && user?.sub.name.length >= 0 ? <Outlet /> : <Navigate to="/login/css" replace />
+    return user && user?.sub.name.length >= 0 ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/login/algorithm" replace />
+    )
   }
   const RenderArenaRoutes = () => {
     if (user && user?.sub.name.length >= 0) {
       return <Outlet />
     } else {
-      return <Navigate to="/" replace />
+      return <Navigate to="/algorithm" replace />
     }
   }
 
   const RenderAdminRoutes = () => {
-    return user?.sub.userData.role === 'admin' ? <Outlet /> : <Navigate to="/css" replace />
+    return user?.sub.userData.role === 'admin' ? <Outlet /> : <Navigate to="/algorithm" replace />
   }
 
   return (
@@ -95,7 +92,7 @@ const Switch = () => {
           <Route path={route.path} element={route.element} key={idx}></Route>
         ))}
       </Route>
-      <Route path="*" element={<Navigate to="/css" replace />}></Route>
+      <Route path="*" element={<Navigate to="/algorithm" replace />}></Route>
     </Routes>
   )
 }
