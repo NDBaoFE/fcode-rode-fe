@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { gapi } from 'gapi-script'
 import { GoogleLogin } from 'react-google-login'
 
-import Avatar from '../../assets/img/avatar.png'
+import Avatar from '../../assets/img/avatar.svg'
 import LocalStorageUtils from '../../util/LocalStorageUtils'
 import productApi from '../../util/productApi'
 
