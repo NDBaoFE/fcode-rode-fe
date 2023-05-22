@@ -1,5 +1,5 @@
 # F-Code Rode Battle 
-#### This repository is a front-end for hosting the Rode Battle , an  event for all students  in FPT HCM city to  compete and win the prize and also the glory .This event contain two branch : 
+#### This repository is a front-end for hosting the Rode Battle , an  event for all students  in FPT HCM city to  compete and win the prize and also the glory .This project contain two branch : 
 * Back-end : Alogrithm
 * Front-end :CSS (Insprided by cssbattle.dev)
 ![rode](https://user-images.githubusercontent.com/101063286/188270456-87335044-826c-4adf-ac08-8e3e086bcb88.png)
